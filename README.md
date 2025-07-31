@@ -132,14 +132,25 @@ Results will be saved in the `../dataset/nsga2/` directory.
 
 - Results are organized by metaheuristic, instance, and run.
 
+- To access an especific metaheurist, just go to he branch with its name on it. Exemple: NSGA-II its in the branch \"nsga2-runner\", MOEA/D its in \"moead-runner\" and so on.",
+
+  For example:
+  The NSGA-II scripts are in the `nsga2-runner` branch.
+  MOEA/D scripts are in the `moead-runner` branch.
+  COMOLS/D scripts are in the `comolsd-runner` branch."""
+
 ---
 
-## 🧪 Metaheurísticas Suportadas
+## Supported Metaheuristics/Metafeatures
 
 ✅ NSGA-II  
 ✅ MOEA/D  
-✅ CoMOLS/D  
+✅ CoMOLS/D
+
 ✅ Adaptive Walk Decomposition
+
 ✅ Random Walk Decomposition
+
 ✅ Adaptive Walk Pareto
+
 ✅ Random Walk Pareto
