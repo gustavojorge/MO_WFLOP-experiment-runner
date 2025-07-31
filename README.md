@@ -136,6 +136,56 @@ Results will be saved in the `../dataset/nsga2/` directory.
 
 ---
 
+## Supercomputer Command Reference
+
+This section provides the most commonly used terminal commands when working with the supercomputer environment for this project.
+
+### Copy Files Between Local and Remote
+
+**From local to remote:**
+
+```bash
+scp -r -P 2002 "C:/Users/metafeatures_extraction/*" gpu@200.128.51.124:/home/gpu/metafeatures_extraction/
+```
+
+**From remote to local:**
+
+```bash
+scp -r -P 2002 gpu@200.128.51.124:/home/gpu/meta_learning/scripts "C:/Users/last_run"
+```
+
+### File and Directory Management
+
+**Copy a directory recursively:**
+
+```bash
+cp -r meta_learning_v3/instances metafeatures_extraction/
+```
+
+**Move a directory:**
+
+```bash
+mv source_directory target_directory
+```
+
+### Running Scripts in Background
+
+**Using `nohup` to run a script and log its output:**
+
+```bash
+nohup ./check_negative_values.sh &> check_values_output.log 2>&1 &
+```
+
+### Kill Running Processes
+
+**Kill all processes matching a specific command (e.g., `./main.sh 2`):**
+
+```bash
+pkill -f "./main.sh 2"
+```
+
+---
+
 ## Supported Metaheuristics/Metafeatures
 
 ✅ NSGA-II  
