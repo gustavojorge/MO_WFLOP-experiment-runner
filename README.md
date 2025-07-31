@@ -141,10 +141,7 @@ Results will be saved in the `../dataset/nsga2/` directory.
 ✅ NSGA-II  
 ✅ MOEA/D  
 ✅ CoMOLS/D  
-✅ Adaptive Walk Decomposition
-
-✅ Random Walk Decomposition
-
-✅ Adaptive Walk Pareto
-
+✅ Adaptive Walk Decomposition  
+✅ Adaptive Walk Pareto  
+✅ Random Walk Decomposition  
 ✅ Random Walk Pareto
