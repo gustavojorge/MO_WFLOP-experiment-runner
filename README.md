@@ -4,7 +4,7 @@ This repository provides the necessary scripts to compile and run multiple multi
 
 ---
 
-## 🛠️ How to Execute
+## How to Execute
 
 To run:
 
@@ -26,7 +26,7 @@ This script initiates the execution of instances in batches.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 .
@@ -44,7 +44,7 @@ This script initiates the execution of instances in batches.
 
 ---
 
-## 📄 Script Descriptions
+## Script Descriptions
 
 ### `makeall.sh`
 
@@ -140,8 +140,11 @@ Results will be saved in the `../dataset/nsga2/` directory.
 
 ✅ NSGA-II  
 ✅ MOEA/D  
-✅ CoMOLS/D
+✅ CoMOLS/D  
 ✅ Adaptive Walk Decomposition
+
 ✅ Random Walk Decomposition
+
 ✅ Adaptive Walk Pareto
+
 ✅ Random Walk Pareto
