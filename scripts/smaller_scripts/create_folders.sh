@@ -11,7 +11,7 @@ mkdir -p "$main_dir"
 
 echo "------------- Creating the directory structure... -------------"
 
-for D in 'A' '172' '240' '456'; do
+for D in {A..J} {0..500} {501..505}; do
     for subdir in {1..20}; do
         mkdir -p "$main_dir/$D/$subdir"
     done
