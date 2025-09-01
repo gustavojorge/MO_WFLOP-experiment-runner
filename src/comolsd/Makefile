@@ -49,10 +49,13 @@ SRC_FILES = \
     ${SRC_DIR}/metaheuristics/comolsd/modules/codvs.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/get_nadir_point.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/local_search.cpp \
-    ${SRC_DIR}/metaheuristics/comolsd/modules/make_population_pointers.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/unionFind.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/update_population.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/build_neighborhood_decision_space.cpp \
+    ${SRC_DIR}/metaheuristics/comolsd/modules/get_global_nadir_point.cpp \
+    ${SRC_DIR}/metaheuristics/comolsd/modules/get_global_z_point.cpp \
+    ${SRC_DIR}/metaheuristics/comolsd/modules/min_max_cost.cpp \
+    ${SRC_DIR}/metaheuristics/comolsd/modules/normalize_objectives.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/comolsd.cpp \
     instance_info.cpp
 

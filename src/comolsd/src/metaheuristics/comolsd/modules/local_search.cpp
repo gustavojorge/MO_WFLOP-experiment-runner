@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void local_search(vector<Solution*>& population,
+void local_search(vector<Solution>& population,
                   const vector<pair<double, double>>& weight_vectors,
                   const pair<double, double>& reference_point,
                   int number_of_neighbors,
@@ -25,9 +25,9 @@ void local_search(vector<Solution*>& population,
 
             isSearched[i] = true;
             all_searched = false;
-            
+
             // Generate the neighbors of x^i in the decision space
-            vector<Solution> neighbors = build_neighborhood_decision_space(*population[i], number_of_neighbors);
+            vector<Solution> neighbors = build_neighborhood_decision_space(population[i], number_of_neighbors);
 
             // For each neighbor y ∈ N(x^i)
             for (const Solution& y : neighbors) { //N(x) neighborhood exploration
@@ -36,12 +36,12 @@ void local_search(vector<Solution*>& population,
                 for (int j = 0; j < size_population; ++j) {
 
                     double g_y = aggregation_function(y.fitness, weight_vectors[j], reference_point);
-                    double g_xj = aggregation_function(population[j]->fitness, weight_vectors[j], reference_point);
+                    double g_xj = aggregation_function(population[j].fitness, weight_vectors[j], reference_point);
 
                     // If y improves subproblem j, then update
                     if (g_y >= g_xj) {
-                        *population[j] = y;                 // Replaces it 
-                        isSearched[j] = false;             // Mark as "unsearched" as it has been updated
+                        population[j] = y;          // Replaces it 
+                        isSearched[j] = false;      // Mark as "unsearched" as it has been updated
                     }
                 }
             }

@@ -6,7 +6,10 @@ create_folders="./smaller_scripts/create_folders.sh"
 echo "Running script 1 = create_folders.sh"
 bash "$create_folders"
 
-nohup "$script" 504 A H &> "./logs/batch_A_to_J_plus_0.txt" &
+nohup "$script" A &> "./logs/batch_A.txt" &
+nohup "$script" 172 &> "./logs/batch_172.txt" &
+nohup "$script" 456 &> "./logs/batch_456.txt" &
+nohup "$script" 240 &> "./logs/batch_240.txt" &
 
 # start=1
 # end=500

@@ -88,12 +88,6 @@ void mutation(Solution &solution){
   Solution *sol = new Solution(solution);
   pareto->adicionarSol(sol);
 
-  // cout << "Solução criada: " << sol->fitness.first << " " << sol->fitness.second;
-
-  // for(int i = 0; i < sol->turbines.size(); i++){
-  //   cout << " " << sol->turbines[i].size();
-  // } cout << endl;
-
   countRevalue++;
 
   if(countRevalue % 100000 == 0){

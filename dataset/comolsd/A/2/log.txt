@@ -2,7 +2,7 @@
 Instance: A
 Run: 2
 Metaheuristic: COMOLS/D
-Execution started at: qui 31 jul 2025 02:33:32 -03
+Execution started at: Fri Aug 29 01:09:16     2025
 5
 
 Number of subproblems: 100
@@ -14,8 +14,8 @@ Angle: 330.000000000000
 
 Run time:
 
-real	3m2,896s
-user	3m2,417s
-sys	0m0,358s
-Execution ended at: qui 31 jul 2025 02:36:35 -03
+real	15m23.949s
+user	0m0.031s
+sys	0m0.000s
+Execution ended at: Fri Aug 29 01:24:40     2025
 =================================================================

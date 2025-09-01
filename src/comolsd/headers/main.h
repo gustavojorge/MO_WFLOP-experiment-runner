@@ -29,9 +29,12 @@
 #include "../headers/metaheuristics/comolsd/modules/calculate_ipbi.h"
 #include "../headers/metaheuristics/comolsd/modules/calculate_ws.h"
 #include "../headers/metaheuristics/comolsd/modules/codvs.h"
+#include "../headers/metaheuristics/comolsd/modules/get_global_z_point.h"
+#include "../headers/metaheuristics/comolsd/modules/get_global_nadir_point.h"
 #include "../headers/metaheuristics/comolsd/modules/get_nadir_point.h"
 #include "../headers/metaheuristics/comolsd/modules/local_search.h"
-#include "../headers/metaheuristics/comolsd/modules/make_population_pointers.h"
+#include "../headers/metaheuristics/comolsd/modules/min_max_cost.h"
+#include "../headers/metaheuristics/comolsd/modules/normalize_objectives.h"
 #include "../headers/metaheuristics/comolsd/modules/unionFind.h"
 #include "../headers/metaheuristics/comolsd/modules/update_population.h"
 

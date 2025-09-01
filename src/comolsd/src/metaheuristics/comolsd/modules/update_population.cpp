@@ -32,7 +32,6 @@ vector<Solution> update_population(
             if (new_value >= current_value) {
                 TQ[i] = x;
             }
-
         }
     }
 
