@@ -140,6 +140,12 @@ Results will be saved in the `../dataset/nsga2/` directory.
 
 This section provides the most commonly used terminal commands when working with the supercomputer environment for this project.
 
+### Supercomputer access
+
+Address: ssh -p 2002 gpu@200.128.51.124
+
+Note: After entering the address, simply enter the password.
+
 ### Copy Files Between Local and Remote
 
 **From local to remote:**
@@ -178,11 +184,13 @@ nohup ./check_negative_values.sh &> check_values_output.log 2>&1 &
 
 ### Kill Running Processes
 
-**Kill all processes matching a specific command (e.g., `./main.sh 2`):**
+**Kill all processes matching a specific command (e.g., `./main.sh`):**
 
 ```bash
-pkill -f "./main.sh 2"
+pkill -f "./main.sh"
 ```
+
+This command kills all processes named "main.sh"
 
 ---
 
