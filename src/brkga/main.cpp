@@ -43,5 +43,5 @@ int main(int argc, char* argv[]){
     cout << "Run time:" << endl;
     
     auto population = create_initial_population_brkga(SIZE_OF_POPULATION);
-    brkga_nsga2(population);
+    brkga_moead(population);
 }
