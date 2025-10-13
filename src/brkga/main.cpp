@@ -9,7 +9,7 @@ int countRevalue = 0;
 
 BoundedParetoSet * pareto = new BoundedParetoSet();
 int stop_criteria = 1000000;
-string algorithm = "comolsd";
+string algorithm = "brkga";
 string instance = "A";
 string root_folder = "./";
 
@@ -42,6 +42,6 @@ int main(int argc, char* argv[]){
 
     cout << "Run time:" << endl;
     
-    auto population = create_initial_population(SIZE_OF_POPULATION);
-    comolsd(population);
+    auto population = create_initial_population_brkga(SIZE_OF_POPULATION);
+    brkga_nsga2(population);
 }

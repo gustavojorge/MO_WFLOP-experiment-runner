@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p ./logs
 script="./main.sh"
 create_folders="./smaller_scripts/create_folders.sh"
 

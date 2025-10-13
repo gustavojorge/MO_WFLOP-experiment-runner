@@ -5,6 +5,8 @@ CXXFLAGS = -std=c++17 -Werror -O2 \
     -I./headers/metaheuristics \
     -I./headers/metaheuristics/moead \
     -I./headers/metaheuristics/moead/modules \
+    -I./headers/metaheuristics/brkga \
+    -I./headers/metaheuristics/brkga/modules \
     -I./headers/metaheuristics/nsga2 \
     -I./headers/metaheuristics/nsga2/modules \
     -I./headers/metaheuristics/comolsd \
@@ -21,6 +23,7 @@ META_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation
 CROSS_DIR = $(SRC_DIR)/global_modules/genetic_operators/crossover
 RSOLUTION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_random_solution
 POPULATION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_population
+POPULATION_BRKGA_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_population_brkga
 
 SRC_FILES = \
     $(SRC_DIR)/adaptive_grid/ParetoSet.cpp \
@@ -32,12 +35,17 @@ SRC_FILES = \
     $(RSOLUTION_DIR)/generate_rSolution.cpp \
     $(META_DIR)/mutation.cpp \
     $(CROSS_DIR)/crossover.cpp \
+    $(POPULATION_BRKGA_DIR)/create_population_brkga.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/generate_neighborhood.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/generate_weight_vectors.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/get_best_z_point.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/tchebycheff.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/updateEP.cpp \
     $(SRC_DIR)/metaheuristics/moead/moead.cpp \
+    $(SRC_DIR)/metaheuristics/brkga/modules/decode_brkga.cpp \
+    $(SRC_DIR)/metaheuristics/brkga/modules/update_population_brkga.cpp \
+    $(SRC_DIR)/metaheuristics/brkga/brkga_moead.cpp \
+    $(SRC_DIR)/metaheuristics/brkga/brkga_nsga2.cpp \
     ${SRC_DIR}/metaheuristics/nsga2/modules/binary_tournament.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/non_dominated_sorting.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/arena_non_dominated_sorting.cpp \
@@ -61,7 +69,7 @@ SRC_FILES = \
 
 MAIN_FILE = main.cpp
 
-OUTPUT = comolsd
+OUTPUT = brkga
 
 $(OUTPUT): $(SRC_FILES) $(MAIN_FILE)
 	@echo Starting compilation of $(OUTPUT)...

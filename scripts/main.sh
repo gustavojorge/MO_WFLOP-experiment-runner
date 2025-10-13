@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script2="./smaller_scripts/comolsd.sh"
+script2="./smaller_scripts/brkga.sh"
 
 batch=("$@")
 
@@ -21,10 +21,10 @@ for instance in "${batch[@]}"; do
 
     # Appending logs to the file
     {
-      echo "Running COMOLS/D with instance $instance, Run: $i"
+      echo "Running BRKGA-NSGA2 with instance $instance, Run: $i"
       bash "$script2" "$instance" "$i"
 
-      echo "COMOLS/D has been executed for instance: $instance, Run: $i."
+      echo "BRKGA-NSGA2 has been executed for instance: $instance, Run: $i."
       echo "---------------------------------------------"
     } >> "$log_file" 2>&1
 

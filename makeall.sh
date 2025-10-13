@@ -1,11 +1,11 @@
 #!/bin/bash
 
 directories=(
-    "./src/comolsd"
+    "./src/brkga"
 )
 
 output_files=(
-    "comolsd"
+    "brkga"
 )
 
 destination="./scripts/exe"
@@ -44,7 +44,7 @@ cd .. || { echo "Error returning to './scripts'"; exit 1; }
 scripts_dir="./smaller_scripts"
 scripts=(
     "create_folders.sh"
-    "comolsd.sh"
+    "brkga.sh"
 )
 
 if [[ ! -d "$scripts_dir" ]]; then

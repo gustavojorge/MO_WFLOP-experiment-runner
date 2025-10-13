@@ -5,6 +5,7 @@
 
 #include "../headers/global_modules/generate_initial_population/population.h"
 #include "../headers/global_modules/generate_initial_population/generate_rSolution.h"
+#include "../headers/global_modules/generate_initial_population/create_population_brkga.h"
 
 #include "../headers/global_modules/genetic_operators/mutation.h"
 #include "../headers/global_modules/genetic_operators/crossover.h"
@@ -37,6 +38,11 @@
 #include "../headers/metaheuristics/comolsd/modules/normalize_objectives.h"
 #include "../headers/metaheuristics/comolsd/modules/unionFind.h"
 #include "../headers/metaheuristics/comolsd/modules/update_population.h"
+
+#include "../headers/metaheuristics/brkga/brkga_moead.h"
+#include "../headers/metaheuristics/brkga/brkga_nsga2.h"
+#include "../headers/metaheuristics/brkga/modules/decode_brkga.h"
+#include "../headers/metaheuristics/brkga/modules/update_population_brkga.h"
 
 
 // #include "../metafeatures/features_extraction.cpp"
