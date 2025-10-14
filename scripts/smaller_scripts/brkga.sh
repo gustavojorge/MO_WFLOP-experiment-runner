@@ -11,6 +11,8 @@ log_file="$log_dir/log.txt"
 path="../dataset/brkga/$instance/$run/"
 log_path="../dataset/moead/$instance/$run/log.txt"
 
+angle=$(grep "Angle:" "$log_path" | awk '{print $2}')
+wind=$(grep "Wind:" "$log_path" | awk '{print $2}')
 
 
 mkdir -p "$log_dir"
@@ -22,7 +24,7 @@ mkdir -p "$log_dir"
     echo "Metaheuristic: BRKGA-NSGA2"
     echo "Execution started at: $(date)"
 
-    { time ./exe/brkga "$instance" "$path"; } 2>&1
+    { time ./exe/brkga "$instance" "$path" "$angle" "$wind"; } 2>&1
 
     echo "Execution ended at: $(date)"
     echo "================================================================="
