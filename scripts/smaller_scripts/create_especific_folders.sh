@@ -5,7 +5,7 @@ main_dir="../dataset/brkga"
 LOG_DIR="./logs"
 
 # Lista das instâncias específicas a serem criadas
-INSTANCES=("172" "240" "456" "A")
+INSTANCES=("501" "502" "503" "504" "505")
 
 # Função de Limpeza Total (Garantida)
 cleanup_all_previous_results() {

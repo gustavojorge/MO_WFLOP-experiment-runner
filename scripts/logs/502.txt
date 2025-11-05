@@ -1,0 +1,100 @@
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 1
+Executing BRKGA-NSGA2 with: Instance=502, Run=1
+BRKGA-NSGA2 concluído para 502, Run: 1.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 2
+Executing BRKGA-NSGA2 with: Instance=502, Run=2
+BRKGA-NSGA2 concluído para 502, Run: 2.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 3
+Executing BRKGA-NSGA2 with: Instance=502, Run=3
+BRKGA-NSGA2 concluído para 502, Run: 3.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 4
+Executing BRKGA-NSGA2 with: Instance=502, Run=4
+BRKGA-NSGA2 concluído para 502, Run: 4.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 5
+Executing BRKGA-NSGA2 with: Instance=502, Run=5
+BRKGA-NSGA2 concluído para 502, Run: 5.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 6
+Executing BRKGA-NSGA2 with: Instance=502, Run=6
+BRKGA-NSGA2 concluído para 502, Run: 6.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 7
+Executing BRKGA-NSGA2 with: Instance=502, Run=7
+BRKGA-NSGA2 concluído para 502, Run: 7.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 8
+Executing BRKGA-NSGA2 with: Instance=502, Run=8
+BRKGA-NSGA2 concluído para 502, Run: 8.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 9
+Executing BRKGA-NSGA2 with: Instance=502, Run=9
+BRKGA-NSGA2 concluído para 502, Run: 9.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 10
+Executing BRKGA-NSGA2 with: Instance=502, Run=10
+BRKGA-NSGA2 concluído para 502, Run: 10.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 11
+Executing BRKGA-NSGA2 with: Instance=502, Run=11
+BRKGA-NSGA2 concluído para 502, Run: 11.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 12
+Executing BRKGA-NSGA2 with: Instance=502, Run=12
+BRKGA-NSGA2 concluído para 502, Run: 12.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 13
+Executing BRKGA-NSGA2 with: Instance=502, Run=13
+BRKGA-NSGA2 concluído para 502, Run: 13.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 14
+Executing BRKGA-NSGA2 with: Instance=502, Run=14
+BRKGA-NSGA2 concluído para 502, Run: 14.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 15
+Executing BRKGA-NSGA2 with: Instance=502, Run=15
+BRKGA-NSGA2 concluído para 502, Run: 15.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 16
+Executing BRKGA-NSGA2 with: Instance=502, Run=16
+BRKGA-NSGA2 concluído para 502, Run: 16.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 17
+Executing BRKGA-NSGA2 with: Instance=502, Run=17
+BRKGA-NSGA2 concluído para 502, Run: 17.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 18
+Executing BRKGA-NSGA2 with: Instance=502, Run=18
+BRKGA-NSGA2 concluído para 502, Run: 18.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 19
+Executing BRKGA-NSGA2 with: Instance=502, Run=19
+BRKGA-NSGA2 concluído para 502, Run: 19.
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 502, Run: 20
+Executing BRKGA-NSGA2 with: Instance=502, Run=20
+BRKGA-NSGA2 concluído para 502, Run: 20.
+---------------------------------------------

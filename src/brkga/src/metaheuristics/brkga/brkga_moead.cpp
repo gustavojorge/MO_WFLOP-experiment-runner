@@ -21,8 +21,8 @@
 #include "../../../headers/metaheuristics/moead/modules/tchebycheff.h"
 #include "../../../headers/metaheuristics/moead/modules/updateEP.h"
 
-#include "../../../headers/global_modules/genetic_operators/mutation.h"
-#include "../../../headers/global_modules/genetic_operators/crossover.h"
+#include "../../../headers/global_modules/genetic_operators/mutation_brkga.h"
+#include "../../../headers/global_modules/genetic_operators/crossover_brkga.h"
 
 #include "../../../headers/global_modules/dominates.h"
 #include "../../../headers/global_modules/isEqual.h"
@@ -31,103 +31,40 @@ using namespace std;
 
 
 
-vector<Solution> elitism_moead(vector<Solution>& population, int elite_size) {
+vector<Solution> brkga_moead(vector<Solution>& population) {
+
+    //Initializing the random number generator 
+    random_device rd;
+    mt19937 gen(rd());
+
+    //MOAED parameters 
     int size_population = population.size();
+    double input_cross_prob = 0.5;
+    double input_mutation_prob = 0.5;
+    double bias = 0.7;
+    int number_of_neighbors = 10;
 
-    // Build up External Population (EP)
-    list<Solution*> EP;
-    for (auto& sol : population) {
-        updateEP(EP, &sol);
-    }
+    // Step 1.1: Initialize EP (External Population)
+    //The EP vector will contain only the non-dominated and not equal solutions from the initial population
 
-    // Generate weight vector (lambda)
-    vector<pair<double, double>> lambda_vector = build_weight_vector(size_population);
+    //Building the lambda vector, ie, the vector of weights to each subproblem i
+    vector<pair<double, double>> lambda_vector = build_weight_vector(size_population); 
 
-    // Generate neighborhood
-    int number_of_neighbors = min(150, size_population-1);
+    //Step 1.2: Building the neighborhood (B) of each lambda vector i (or each subproblem i)
     vector<vector<int>> neighborhood = build_neighborhood(number_of_neighbors, lambda_vector, size_population);
+  
+    //Step 1.4: z_point
+    pair<double, double> z_point = get_best_z_point(population);
 
-    // Calculate z-point (ideal point)
-    pair<double, double> z_point;
-    if (EP.empty()) {
-        z_point = get_best_z_point(population);
-    } else {
-        // Convert EP (list<Solution*>) to vector<Solution>
-        vector<Solution> ep_vec;
-        for (auto ptr : EP) {
-            ep_vec.push_back(*ptr);
-        }
-        z_point = get_best_z_point(ep_vec);
-    }
-
-    // Calculate Tchebycheff values
+    /*Step 1.3: tch_vector = vector with the value of tchebycheff function to each subproblem (weight vector) i 
+    Each index i of tch_vector (to reference the lambda vector i, neighborhood i of a subproblem i) contains the TCH of the subproblem i*/
     vector<double> tch_vector(size_population);
-    for (int i = 0; i < size_population; i++) {
+
+    for(int i = 0; i < tch_vector.size(); i++){
         tch_vector[i] = calculate_gte(population[i].fitness, lambda_vector[i], z_point);
     }
 
-    // Selecting the greatest values (Tchebycheff minors values)
-    vector<int> indices(size_population);
-    iota(indices.begin(), indices.end(), 0);
-
-    sort(indices.begin(), indices.end(), [&](int a, int b) {
-        return tch_vector[a] < tch_vector[b];
-    });
-
-    // Construindo elite com base na diversidade (usando EP + Tchebycheff)
-    vector<Solution> elite;
-    elite.reserve(elite_size);
-
-
-    for (int i = 0; i < size_population && elite.size() < elite_size; i++) {
-        bool dominated = false;
-        for (auto& e : elite) {
-            if (dominates(e, population[indices[i]]) ||
-                isEqual(e, population[indices[i]])) {
-                dominated = true;
-                break;
-                }
-        }
-        if (!dominated) elite.push_back(population[indices[i]]);
-    }
-
-    // Se não atingiu o tamanho, completa com os melhores Tchebycheff restantes
-    int i = 0;
-    while (elite.size() < elite_size && i < size_population) {
-        elite.push_back(population[indices[i++]]);
-    }
-
-    return elite;
-}
-
-
-
-vector<Solution> brkga_moead(vector<Solution>& population) {
-
-    
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0.0, 1.0);
-    
-    
-    
-    // BRKGA parameters
-    int size_population = population.size();
-    double elite_fraction = 0.3;     // fração da elite
-    double mutant_fraction = 0.1;    // fração de mutantes
-    double bias = 0.9;
-    int stop_criteria = 1000000;
-
-
-    int num_elite = elite_fraction * size_population;
-    int num_mutants = mutant_fraction * size_population;
-
-    int chromosome_size = 0;
-    for (int z = 0; z < num_zones; z++) {
-        chromosome_size += foundations[z].size();
-    }
-
-
+    //Step 2: Update
 
     int generation = 0;
 
@@ -135,43 +72,70 @@ vector<Solution> brkga_moead(vector<Solution>& population) {
 
     while (countRevalue < stop_criteria) {
 
-        // Ordena população pela estrategia de decomposicao do MOEAD
-        vector<Solution> elite = elitism_moead(population, num_elite);
+        infoRunBrkga << "Generation " << generation << " | Revalues: " << countRevalue << " | GridSize: " << pareto->getSize() << endl;
+        
+    for (int i = 0; i < size_population; i++) {
 
+      // Step 2.1: Reproduction
+      // Randomly select two indices k and l from the neighborhood B(i)
+      uniform_int_distribution<> dis(0, number_of_neighbors - 1);
+      int k = neighborhood[i][dis(gen)];
+      int l = neighborhood[i][dis(gen)];
 
-        // Mutantes (novos cromossomos aleatórios)
-        vector<Solution> mutants;
-        for (int i = 0; i < num_mutants; i++) {
-            vector<double> chromo;
-            for (int j = 0; j < chromosome_size; j++) {
-                chromo.push_back(dis(gen));
-            }
-            mutants.push_back(decode_brkga(chromo)); // decodificação necessária
+      while (k == l) {
+        l = neighborhood[i][dis(gen)];
+      }
+
+      Solution * parentA = new Solution;
+      Solution * parentB = new Solution;
+      *parentA = population[k];
+      *parentB = population[l];
+
+      Solution * child1 = new Solution;
+      Solution * child2 = new Solution;
+      *child1 = *parentA;
+      *child2 = *parentB;
+
+      // Generate new solution y using genetic operators
+
+      //CROSSOVER
+
+      if((static_cast<double>(rand()) / RAND_MAX) < input_cross_prob){ 
+        *child1 = crossover_brkga(*parentA, *parentB, bias);
+        *child2 = crossover_brkga(*parentB, *parentA, bias);        
+      }
+
+      if((static_cast<double>(rand()) / RAND_MAX) < input_mutation_prob){
+        mutation_brkga(*child1, input_mutation_prob);
+        mutation_brkga(*child2, input_mutation_prob);
+      }
+
+      delete parentA;
+      delete parentB;
+      
+      // Step 2.3: Update of z point
+      for(const auto sol : pareto->getElementos()){
+        z_point.first = max(z_point.first, sol->fitness.first);
+        z_point.second = max(z_point.second, sol->fitness.second);
+      }
+
+      // Step 2.4: Neighboring solutions update
+      for (int j : neighborhood[i]) {
+        double child1_tch = calculate_gte(child1->fitness, lambda_vector[j], z_point);
+        double sol1_pop = calculate_gte(population[j].fitness, lambda_vector[j], z_point);
+        if (child1_tch <= sol1_pop) {
+          population[j] = *child1;
         }
-
-        // Descendentes
-        vector<Solution> offspring;
-        while (offspring.size() < size_population - num_elite - num_mutants) {
-            // escolhe aleatoriamente um pai da elite e um não-elite
-            uniform_int_distribution<> dis_elite(0, num_elite - 1);
-            uniform_int_distribution<> dis_nonelite(num_elite, size_population - 1);
-
-            Solution parent_e = population[dis_elite(gen)];
-            Solution parent_n = population[dis_nonelite(gen)];
-
-            vector<double> child_chromo(chromosome_size);
-            for (int j = 0; j < chromosome_size; j++) {
-                double r = dis(gen);
-                child_chromo[j] = (r < bias) ? parent_e.chromosome[j] : parent_n.chromosome[j];
-            }
-            offspring.push_back(decode_brkga(child_chromo));
+        
+        double child2_tch = calculate_gte(child2->fitness, lambda_vector[j], z_point);
+        double sol2_pop = calculate_gte(population[j].fitness, lambda_vector[j], z_point);
+        if (child2_tch <= sol2_pop) {
+          population[j] = *child2;
         }
-
-        // Nova população = elite + mutantes + descendentes
-        population.clear();
-        population.insert(population.end(), elite.begin(), elite.end());
-        population.insert(population.end(), mutants.begin(), mutants.end());
-        population.insert(population.end(), offspring.begin(), offspring.end());
+      }
+      delete child1;
+      delete child2;
+    }
 
 
         generation++;

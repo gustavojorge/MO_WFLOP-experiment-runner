@@ -20,7 +20,9 @@ CXXFLAGS = -std=c++17 -Werror -O2 \
 SRC_DIR = src
 HEADER_DIR = headers
 META_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation
+META_BRKGA_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation_brkga
 CROSS_DIR = $(SRC_DIR)/global_modules/genetic_operators/crossover
+CROSS_BRKGA_DIR = $(SRC_DIR)/global_modules/genetic_operators/crossover_brkga
 RSOLUTION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_random_solution
 POPULATION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_population
 POPULATION_BRKGA_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_population_brkga
@@ -34,7 +36,9 @@ SRC_FILES = \
     $(POPULATION_DIR)/population.cpp \
     $(RSOLUTION_DIR)/generate_rSolution.cpp \
     $(META_DIR)/mutation.cpp \
+    $(META_BRKGA_DIR)/mutation_brkga.cpp \
     $(CROSS_DIR)/crossover.cpp \
+    $(CROSS_BRKGA_DIR)/crossover_brkga.cpp \
     $(POPULATION_BRKGA_DIR)/create_population_brkga.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/generate_neighborhood.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/generate_weight_vectors.cpp \

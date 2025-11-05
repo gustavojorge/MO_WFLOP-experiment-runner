@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
-#include <fstream> // Adicionado para ofstream
+#include <fstream>
 
 #include "../../../headers/global_modules/generate_initial_population/population.h"
 #include "../../../headers/global_modules/generate_initial_population/generate_rSolution.h"
@@ -16,11 +16,13 @@
 #include "../../../headers/metaheuristics/brkga/brkga_moead.h"
 
 #include "../../../headers/metaheuristics/nsga2/modules/non_dominated_sorting.h"
+#include "../../../headers/metaheuristics/nsga2/modules/binary_tournament.h"
 #include "../../../headers/metaheuristics/nsga2/modules/crowding_distance.h"
+#include "../../../headers/metaheuristics/nsga2/modules/arena_non_dominated_sorting.h"
 #include "../../../headers/metaheuristics/nsga2/nsga2.h"
 
-#include "../../../headers/global_modules/genetic_operators/mutation.h"
-#include "../../../headers/global_modules/genetic_operators/crossover.h"
+#include "../../../headers/global_modules/genetic_operators/mutation_brkga.h"
+#include "../../../headers/global_modules/genetic_operators/crossover_brkga.h"
 
 #include "../../../headers/global_modules/dominates.h"
 #include "../../../headers/global_modules/isEqual.h"
@@ -28,179 +30,145 @@
 using namespace std;
 
 // Função auxiliar para evitar adicionar soluções duplicadas a uma lista temporária
-void add_if_not_duplicate(vector<Solution>& target_vector, const Solution& new_solution) {
-    for (const auto& sol : target_vector) {
-        if (isEqual(sol, new_solution)) {
-            return;
+void add_if_not_duplicate(vector<Solution*>& population, Solution* solution){
+    for (auto& existing_solution : population) {
+        if (isEqual(*existing_solution, *solution)) {
+            delete solution;
+            return;          
         }
     }
-    target_vector.push_back(new_solution);
+    population.push_back(solution);
 }
 
 
-vector<Solution> brkga_nsga2(vector<Solution>& initial_population) {
+vector<Solution* > brkga_nsga2(vector<Solution>& initial_population) {
 
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0.0, 1.0);
+    // Inicializa população (vetor de ponteiros)
+    vector<Solution*> * population = new vector<Solution*>();
 
-    // --- Parâmetros do BRKGA ---
-     int size_population = initial_population.size();
-     double elite_fraction = 0.3;
-     double mutant_fraction = 0.2;
-     double bias = 0.7;
-     int stop_criteria = 1000000;
-
-     int num_elite = static_cast<int>(elite_fraction * size_population);
-     int num_mutants = static_cast<int>(mutant_fraction * size_population);
-     int num_offspring = size_population - num_elite - num_mutants;
-
-    vector<Solution> population = initial_population;
-
-    // Calculado diretamente a partir das fontes de dados, sem depender da população inicial.
-    int chromosome_size = 0;
-    for (int z = 0; z < num_zones; z++) {
-        chromosome_size += foundations[z].size();
+    for(auto& sol : initial_population){
+        Solution * s = new Solution(sol);
+        add_if_not_duplicate(*population, s);
     }
-    
+
+    // Inicialização RNG
+    default_random_engine re{(unsigned)time(nullptr)};
+    uniform_real_distribution<double> dist(0.0, 1.0);
+
+    // Parâmetros BRKGA
+    int size_population = (int)population->size();
+    double cross_prob = 0.6;
+    double mutation_prob = 0.5;
+    double bias = 0.5;
+    int stop_criteria = 1000000;
+
+    // chromosome_size (verificação)
+    int chromosome_size = 0;
+    for (int z = 0; z < num_zones; z++) chromosome_size += foundations[z].size();
+
     int generation = 0;
     ofstream infoRunBrkga(root_folder + "infoRun.txt");
 
+    // Loop principal
     while (countRevalue < stop_criteria) {
-        
-        infoRunBrkga << "Generation " << generation << " | Revalues: " << countRevalue << " | Gridsize: " << pareto->getSize() << endl;
 
-        // --- 1. SELEÇÃO DE PAIS (ELITE E NÃO-ELITE) ---
-        vector<Solution*> population_ptr;
-        for (auto& sol : population) {
-            population_ptr.push_back(&sol);
-        }
+        infoRunBrkga << "Generation " << generation
+                     << " | Evaluations: " << countRevalue
+                     << " | Gridsize (Pareto): " << pareto->getSize()
+                     << endl;
 
-        auto fronts = non_dominated_sorting(population_ptr);
-        
-        vector<Solution> elite_parents;
-        vector<Solution> non_elite_parents;
+        // offspring temporário
+        vector<Solution*> * offspring_population = new vector<Solution*>();
 
-        for (auto& front_ptr : fronts) {
-            if (elite_parents.size() >= num_elite) break;
-            
-            vector<Solution*>& front = *front_ptr;
-            if (elite_parents.size() + front.size() <= num_elite) {
-                for(auto sol_ptr : front) elite_parents.push_back(*sol_ptr);
+        for(int i = 0; i < size_population; i++){
+            // Seleção de pais
+            Solution** parents = binary_tournament(*population);
+
+
+            // Cria cópias dos pais para operar
+            Solution child1 = *parents[0];
+            Solution child2 = *parents[1];
+
+            // Crossover (retorna Solution)
+            if (dist(re) < cross_prob) {
+                child1 = crossover_brkga(*parents[0], *parents[1], bias);
+                child2 = crossover_brkga(*parents[1], *parents[0], bias);
             } else {
-                auto sorted_front = crowding_distance(front);
-                int remaining = num_elite - elite_parents.size();
-                for (int i = 0; i < remaining && i < sorted_front.size(); ++i) {
-                    elite_parents.push_back(*sorted_front[i]);
-                }
-            }
-        }
-        
-        for(auto& sol : population){
-            bool is_elite = false;
-            for(auto& elite_sol : elite_parents){
-                if(isEqual(sol, elite_sol)){
-                    is_elite = true;
-                    break;
-                }
-            }
-            if(!is_elite){
-                non_elite_parents.push_back(sol);
-            }
-        }
-
-        // Garante que temos pais não-elite para o crossover, caso a população inteira seja elite
-        if (non_elite_parents.empty()) {
-            non_elite_parents = population;
-        }
-
-        // --- 2. GERAÇÃO DA NOVA POPULAÇÃO (OFFSPRING) ---
-        vector<Solution> offspring_population;
-
-        // 2.1. Crossover
-        uniform_int_distribution<> dis_elite(0, elite_parents.size() - 1);
-        uniform_int_distribution<> dis_nonelite(0, non_elite_parents.size() - 1);
-
-        for (int i = 0; i < num_offspring; ++i) {
-             Solution& parent_e = elite_parents[dis_elite(gen)];
-             Solution& parent_n = non_elite_parents[dis_nonelite(gen)];
-
-            vector<double> child_chromo(chromosome_size);
-            for (int j = 0; j < chromosome_size; ++j) {
-                child_chromo[j] = (dis(gen) < bias) ? parent_e.chromosome[j] : parent_n.chromosome[j];
+                // Seleciona (aleatoriamente) dois indivíduos da população
+                int r1 = rand() % size_population;
+                int r2 = rand() % size_population;
+                child1 = *(*population)[r1];
+                child2 = *(*population)[r2];
             }
 
-            Solution offspring_sol = decode_brkga(child_chromo);
-            
-            Solution* offspring_ptr = new Solution(offspring_sol);
-            pareto->adicionarSol(offspring_ptr);
-            delete offspring_ptr;
-            countRevalue++;
-
-            add_if_not_duplicate(offspring_population, offspring_sol);
-        }
-
-        // 2.2. Mutantes
-        for (int i = 0; i < num_mutants; ++i) {
-            vector<double> chromo(chromosome_size);
-            for (int j = 0; j < chromosome_size; ++j) {
-                chromo[j] = dis(gen);
+            // Mutation (agora retorna Solution)
+            if (dist(re) < mutation_prob) {
+                child1 = mutation_brkga(child1, mutation_prob);
             }
-            
-            Solution mutant_sol = decode_brkga(chromo);
-            
-            Solution* mutant_ptr = new Solution(mutant_sol);
-            pareto->adicionarSol(mutant_ptr);
-            delete mutant_ptr;
-            countRevalue++;
-            
-            add_if_not_duplicate(offspring_population, mutant_sol);
-        }
-        
-        // 2.3 A elite é copiada diretamente para a próxima população
-        for(auto& elite_sol : elite_parents){
-            add_if_not_duplicate(offspring_population, elite_sol);
+            if (dist(re) < mutation_prob) {
+                child2 = mutation_brkga(child2, mutation_prob);
+            }
+
+            // Adiciona à população offspring (aloca novos objetos)
+            add_if_not_duplicate(*offspring_population, new Solution(child1));
+            add_if_not_duplicate(*offspring_population, new Solution(child2));
+
         }
 
-
-        // --- 3. SELEÇÃO DA PRÓXIMA GERAÇÃO ---
-        vector<Solution*> combined_pop_ptr;
-        for (auto& sol : offspring_population) {
-            combined_pop_ptr.push_back(&sol);
+        // Merge: population U offspring -> total_population
+        vector<Solution*> * total_population = new vector<Solution*>();
+        for (auto i : *population) total_population->push_back(new Solution(*i));
+        for (auto i : *offspring_population) {
+            total_population->push_back(new Solution(*i));
+            delete i;
         }
+        delete offspring_population;
 
-        auto new_fronts = non_dominated_sorting(combined_pop_ptr);
-        
-        population.clear();
-        for (auto& front_ptr : new_fronts) {
-            if (population.size() >= size_population) break;
+        // Non-dominated sorting (arena)
+        vector<vector<Solution*> *> * fronts = new vector<vector<Solution*>*>();
+        *fronts = arena_non_dominated_sorting(*total_population);
 
-            vector<Solution*>& front = *front_ptr;
-            if (population.size() + front.size() <= size_population) {
-                for(auto sol_ptr : front) population.push_back(*sol_ptr);
+        // limpa total_population
+        for (auto i : *total_population) delete i;
+        delete total_population;
+
+        // limpa population antiga
+        for (auto i : *population) delete i;
+        population->clear();
+
+        // Reconstrói população a partir dos fronts (NSGA-II procedure)
+        for (auto& front : *fronts) {
+            if ((int)population->size() + (int)front->size() <= size_population) {
+                for (auto solution : *front) population->push_back(new Solution(*solution));
             } else {
-                auto sorted_front = crowding_distance(front);
-                int remaining = size_population - population.size();
-                for (int i = 0; i < remaining && i < sorted_front.size(); ++i) {
-                    population.push_back(*sorted_front[i]);
-                }
-            }
-        }
-        
-        if(countRevalue % 100000 == 0 || countRevalue >= stop_criteria){
-            string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
-            pareto->printAllSolutions(root_folder + path); 
+                auto * front_sorted = new vector<Solution*>();
+                *front_sorted = crowding_distance(*front);
 
-            if(countRevalue >= stop_criteria){
-                pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
+                int remaining_spots = size_population - (int)population->size();
+                for (int j = 0; j < remaining_spots && j < (int)front_sorted->size(); ++j) {
+                    population->push_back(new Solution(*(*front_sorted)[j]));
+                }
+
+                delete front_sorted;
+                break;
             }
         }
+
+        // libera memória dos fronts
+        for (auto front : *fronts) {
+            for (auto solution : *front) delete solution;
+            delete front;
+        }
+        delete fronts;
 
         generation++;
     }
 
     infoRunBrkga.close();
 
-    return population;
+    // Retorna vetor de Solutions (cópia para fora do heap)
+    vector<Solution*> result = *population;
 
+    return *population;
 }
+

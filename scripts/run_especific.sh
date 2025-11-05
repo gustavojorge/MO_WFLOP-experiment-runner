@@ -2,7 +2,7 @@
 
 # --- CONFIGURAÇÃO ---
 # Instâncias que você deseja rodar
-INSTANCES=("172" "240" "456" "A")
+INSTANCES=("501" "502" "503" "504" "505")
 # Caminho para o script que executa o BRKGA para uma única instância/run
 BRKGA_SCRIPT="./smaller_scripts/brkga.sh"
 # O diretório de logs de alto nível
@@ -40,8 +40,6 @@ for instance in "${INSTANCES[@]}"; do
             echo "---------------------------------------------"
         } >> "$LOG_FILE" 2>&1
         
-        # Opcional: Adicionar um delay entre as rodadas se a instância for muito pesada
-        # sleep 1 
     done
 done
 
