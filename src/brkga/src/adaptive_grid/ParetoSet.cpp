@@ -13,6 +13,7 @@
 #include "../../headers/adaptative_grid/Grid.h"
 #include "../../headers/global_modules/generate_initial_population/generate_rSolution.h"
 #include "../../headers/adaptative_grid/ParetoSet.h"
+#include "../../headers/utils/solution_validator.h"
 
 using namespace std;
 
@@ -210,6 +211,29 @@ void ParetoSet::printAllSolutionsLayout(string path) {
     } else {
         cerr << "ERROR! ParetoSet.cpp -> Erro ao abrir o arquivo para escrita: " << path << endl;
     }
+}
+
+bool ParetoSet::validateAllSolutions() {
+    bool all_valid = true;
+    int idx = 0;
+
+    for (auto it = sol.begin(); it != sol.end(); ++it, ++idx) {
+        Solution* s = *it;
+        if (!isValid(*s)) {
+            cerr << "[WARN] Solução inválida encontrada no Pareto: índice " << idx
+                 << " (custo=" << s->fitness.first
+                 << ", potência=" << s->fitness.second << ")" << endl;
+            all_valid = false;
+        }
+    }
+
+    if (all_valid) {
+        cout << "[INFO] Todas as soluções no Pareto são válidas!" << endl;
+    } else {
+        cout << "[INFO] Uma ou mais soluções inválidas foram encontradas no Pareto final." << endl;
+    }
+
+    return all_valid;
 }
 
 

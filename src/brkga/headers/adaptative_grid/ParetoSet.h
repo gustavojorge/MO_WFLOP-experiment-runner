@@ -45,6 +45,7 @@ class ParetoSet {
         
         virtual bool adicionarSol(Solution *s);
         void printAllSolutions(std::string path);
+        bool validateAllSolutions();
         void printAllSolutionsLayout(std::string path);
         int getSize();
         Solution *getSolucao(int p);

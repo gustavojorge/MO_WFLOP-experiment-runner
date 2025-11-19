@@ -2,14 +2,13 @@
 #define DECODE_BRKGA_H
 
 #include <vector>
-#include "../../headers/global_modules/generate_initial_population/generate_rSolution.h"
+#include "../../../headers/wind_farm_entities/turbine.h"
+#include "../../../headers/global_modules/generate_initial_population/generate_rSolution.h"
+
+Solution decode_brkga(const std::vector<double>& chromosome);
+
+#endif
 
 
-using namespace std;
 
 
-
-
-Solution decode_brkga(const vector<double>& chromosome);
-
-#endif // DECODE_BRKGA_H

@@ -19,6 +19,7 @@ CXXFLAGS = -std=c++17 -Werror -O2 \
 
 SRC_DIR = src
 HEADER_DIR = headers
+UTILS_DIR = $(SRC_DIR)/utils
 META_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation
 META_BRKGA_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation_brkga
 CROSS_DIR = $(SRC_DIR)/global_modules/genetic_operators/crossover
@@ -28,6 +29,7 @@ POPULATION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_
 POPULATION_BRKGA_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_population_brkga
 
 SRC_FILES = \
+    $(UTILS_DIR)/solution_validator.cpp\
     $(SRC_DIR)/adaptive_grid/ParetoSet.cpp \
     $(SRC_DIR)/adaptive_grid/BoundedParetoSet.cpp \
     $(SRC_DIR)/adaptive_grid/Grid.cpp \

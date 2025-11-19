@@ -28,7 +28,7 @@ Solution** binary_tournament(vector<Solution*>& population){
   // cout << "Candidate 4: " << candidate4->fitness.first << " " << candidate4->fitness.second << endl;
 
   //Choosing the best solution in the first objective
-  if(candidate1->fitness.first >= candidate2->fitness.first){
+  if(candidate1->fitness.first <= candidate2->fitness.first){
     *parents[0] = *candidate1; 
   } else{
     *parents[0] = *candidate2;

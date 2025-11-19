@@ -44,9 +44,11 @@ vector<Solution> create_initial_population_brkga(int size_population) {
             string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
 
             pareto->printAllSolutions(root_folder + path);
+            pareto->validateAllSolutions();
 
             if(countRevalue >= stop_criteria){
                 pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
+                pareto->validateAllSolutions();
             }
         }
 
