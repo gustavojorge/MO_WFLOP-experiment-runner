@@ -1,0 +1,160 @@
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 1
+Timestamp: Mon Jan 19 09:46:11 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=1
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 1 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 09:51:33 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 2
+Timestamp: Mon Jan 19 09:51:33 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=2
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 2 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 09:56:45 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 3
+Timestamp: Mon Jan 19 09:56:45 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=3
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 3 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:01:52 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 4
+Timestamp: Mon Jan 19 10:01:52 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=4
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 4 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:06:55 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 5
+Timestamp: Mon Jan 19 10:06:55 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=5
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 5 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:12:07 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 6
+Timestamp: Mon Jan 19 10:12:07 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=6
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 6 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:17:27 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 7
+Timestamp: Mon Jan 19 10:17:27 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=7
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 7 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:22:09 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 8
+Timestamp: Mon Jan 19 10:22:09 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=8
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 8 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:26:35 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 9
+Timestamp: Mon Jan 19 10:26:35 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=9
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 9 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:31:04 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 10
+Timestamp: Mon Jan 19 10:31:04 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=10
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 10 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:35:38 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 11
+Timestamp: Mon Jan 19 10:35:38 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=11
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 11 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:40:12 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 12
+Timestamp: Mon Jan 19 10:40:12 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=12
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 12 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:44:48 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 13
+Timestamp: Mon Jan 19 10:44:48 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=13
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 13 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:49:22 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 14
+Timestamp: Mon Jan 19 10:49:22 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=14
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 14 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:53:50 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 15
+Timestamp: Mon Jan 19 10:53:50 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=15
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 15 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 10:58:28 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 16
+Timestamp: Mon Jan 19 10:58:28 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=16
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 16 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 11:02:51 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 17
+Timestamp: Mon Jan 19 11:02:51 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=17
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 17 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 11:07:22 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 18
+Timestamp: Mon Jan 19 11:07:22 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=18
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 18 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 11:11:46 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 19
+Timestamp: Mon Jan 19 11:11:46 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=19
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 19 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 11:16:09 AM -03 2026
+---------------------------------------------
+---------------------------------------------
+Rodando BRKGA-NSGA2 com instância 503, Run: 20
+Timestamp: Mon Jan 19 11:16:09 AM -03 2026
+Executing BRKGA-NSGA2 with: Instance=503, Run=20
+✗ BRKGA-NSGA2 FALHOU para 503, Run: 20 (código: 139)
+  Verifique o log em: ./logs/503.txt
+Timestamp: Mon Jan 19 11:20:35 AM -03 2026
+---------------------------------------------

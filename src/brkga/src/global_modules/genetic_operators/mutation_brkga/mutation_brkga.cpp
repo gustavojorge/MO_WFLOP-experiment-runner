@@ -8,6 +8,8 @@
 
 #include "../../../../headers/global_modules/generate_initial_population/population.h"
 #include "../../../../headers/metaheuristics/brkga/modules/decode_brkga.h"
+#include "../../../../headers/metaheuristics/brkga/modules/decodeAlternative_brkga.h"
+#include "../../../../headers/global_modules/dominates.h"
 
 using namespace std;
 
@@ -27,9 +29,32 @@ void mutationAux_brkga(vector<double>& chromosome, double mutation_rate) {
 Solution mutation_brkga(Solution& offspring, double mutation_rate) {
     mutationAux_brkga(offspring.chromosome, mutation_rate);
     Solution mutated = decode_brkga(offspring.chromosome);
+    Solution mutated2 = decodeAlternative_brkga(offspring.chromosome);
+    Solution* sol_ptr;
 
-    pareto->adicionarSol(new Solution(mutated));
-    countRevalue++;
+    if (dominates(mutated2, mutated)) {
+        sol_ptr = new Solution(mutated2);
+        pareto->adicionarSol(sol_ptr);
+        countRevalue++;
+        mutated = mutated2;
+    }
+    else if (dominates(mutated, mutated2)) {
+        sol_ptr = new Solution(mutated);
+        pareto->adicionarSol(sol_ptr);
+        countRevalue++;
+    }
+    else {
+        if (rand() % 2 == 0) {
+            sol_ptr = new Solution(mutated);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+        } else {
+            sol_ptr = new Solution(mutated2);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+            mutated = mutated2;
+        }
+    }
 
     if (countRevalue % 100000 == 0) {
         string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
@@ -37,6 +62,8 @@ Solution mutation_brkga(Solution& offspring, double mutation_rate) {
         if (countRevalue >= stop_criteria)
             pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
     }
+
+    delete sol_ptr;
 
     return mutated;
 }

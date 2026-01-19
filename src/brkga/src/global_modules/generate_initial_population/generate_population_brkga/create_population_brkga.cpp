@@ -11,6 +11,8 @@
 #include "../../../headers/global_modules/generate_initial_population/population.h"
 #include "../../../headers/global_modules/generate_initial_population/generate_rSolution.h"
 #include "../../../headers/metaheuristics/brkga/modules/decode_brkga.h"
+#include "../../../headers/metaheuristics/brkga/modules/decodeAlternative_brkga.h"
+#include "../../../headers/global_modules/dominates.h"
 
 using namespace std;
 
@@ -35,10 +37,32 @@ vector<Solution> create_initial_population_brkga(int size_population) {
 
         // Decodifica o cromossomo para uma solução
         Solution sol = decode_brkga(chromosome);
-        Solution* sol_ptr = new Solution(sol);
-        pareto->adicionarSol(sol_ptr);
+        Solution sol2 = decodeAlternative_brkga(chromosome);
+        Solution* sol_ptr;
 
-        countRevalue++;
+        if (dominates(sol2, sol)) {
+            sol_ptr = new Solution(sol2);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+        }
+        else if (dominates(sol, sol2)) {
+            sol_ptr = new Solution(sol);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+        }
+        else {
+            if (rand() % 2 == 0) {
+                sol_ptr = new Solution(sol);
+                pareto->adicionarSol(sol_ptr);
+                countRevalue++;
+            } else {
+                sol_ptr = new Solution(sol2);
+                pareto->adicionarSol(sol_ptr);
+                countRevalue++;
+            }
+        }
+
+        
 
         if(countRevalue % 100000 == 0){
             string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";

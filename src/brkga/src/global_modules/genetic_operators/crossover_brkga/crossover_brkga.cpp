@@ -8,6 +8,8 @@
 
 #include "../../../../headers/global_modules/generate_initial_population/population.h"
 #include "../../../../headers/metaheuristics/brkga/modules/decode_brkga.h"
+#include "../../../../headers/metaheuristics/brkga/modules/decodeAlternative_brkga.h"
+#include "../../../../headers/global_modules/dominates.h"
 
 using namespace std;
 
@@ -36,10 +38,34 @@ Solution crossover_brkga(const Solution& parent1, const Solution& parent2, doubl
     vector<double> offspring_chromosome = crossoverAux_brkga(parent1, parent2, bias);
 
     Solution offspring_solution = decode_brkga(offspring_chromosome);
+    Solution offspring_solution2 = decodeAlternative_brkga(offspring_chromosome);
+    Solution* sol_ptr;
 
-    // Adiciona ao Pareto
-    pareto->adicionarSol(new Solution(offspring_solution));
-    countRevalue++;
+    if (dominates(offspring_solution2, offspring_solution)) {
+        sol_ptr = new Solution(offspring_solution2);
+        pareto->adicionarSol(sol_ptr);
+        countRevalue++;
+        offspring_solution = offspring_solution2;
+    }
+    else if (dominates(offspring_solution, offspring_solution2)) {
+        sol_ptr = new Solution(offspring_solution);
+        pareto->adicionarSol(sol_ptr);
+        countRevalue++;
+    }
+    else {
+        if (rand() % 2 == 0) {
+            sol_ptr = new Solution(offspring_solution);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+        } else {
+            sol_ptr = new Solution(offspring_solution2);
+            pareto->adicionarSol(sol_ptr);
+            countRevalue++;
+            offspring_solution = offspring_solution2;
+        }
+    }
+
+
 
     if (countRevalue % 100000 == 0) {
         string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
@@ -47,6 +73,8 @@ Solution crossover_brkga(const Solution& parent1, const Solution& parent2, doubl
         if (countRevalue >= stop_criteria)
             pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
     }
+
+    delete sol_ptr;
 
     return offspring_solution;
 }

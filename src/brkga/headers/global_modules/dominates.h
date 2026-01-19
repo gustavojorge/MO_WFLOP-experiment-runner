@@ -3,6 +3,6 @@
 
 #include "./generate_initial_population/generate_rSolution.h"
 
-bool dominates(Solution solutionA, Solution solutionB);
+bool dominates(const Solution& sol1, const Solution& sol2);
 
 #endif 

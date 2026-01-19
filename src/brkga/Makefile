@@ -49,6 +49,7 @@ SRC_FILES = \
     $(SRC_DIR)/metaheuristics/moead/modules/updateEP.cpp \
     $(SRC_DIR)/metaheuristics/moead/moead.cpp \
     $(SRC_DIR)/metaheuristics/brkga/modules/decode_brkga.cpp \
+    $(SRC_DIR)/metaheuristics/brkga/modules/decodeAlternative_brkga.cpp \
     $(SRC_DIR)/metaheuristics/brkga/modules/update_population_brkga.cpp \
     $(SRC_DIR)/metaheuristics/brkga/brkga_moead.cpp \
     $(SRC_DIR)/metaheuristics/brkga/brkga_nsga2.cpp \

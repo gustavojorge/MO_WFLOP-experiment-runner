@@ -67,12 +67,26 @@ vector<Solution*>* build_front(vector<Solution*> &population) {
 vector<vector<Solution*>*> arena_non_dominated_sorting(vector<Solution*> &population) {
   vector<vector<Solution*>*> fronts;
   int population_count = 0; //A counter to see if we reach the 'size_of_population'
+  const int MAX_ITERATIONS = SIZE_OF_POPULATION * 2;  // Proteção contra loop infinito
+  int iterations = 0;
 
-  while (!population.empty()) {
+  while (!population.empty() && iterations < MAX_ITERATIONS) {
+    iterations++;
+    size_t population_size_before = population.size();
+    
     auto front = build_front(population);
     population_count += front->size();
 
     fronts.push_back(front);
+
+    // Proteção: se a população não diminuiu, sair para evitar loop infinito
+    if (population.size() >= population_size_before && front->size() > 0) {
+      // Se não diminuiu mas temos um front válido, continuar
+      // Mas se já temos fronts suficientes, parar
+      if (population_count >= SIZE_OF_POPULATION) {
+        break;
+      }
+    }
 
     if (population_count >= SIZE_OF_POPULATION) {
       break;
