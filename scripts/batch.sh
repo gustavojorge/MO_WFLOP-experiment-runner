@@ -11,7 +11,7 @@ nohup "$script" A B C D E F G H I J 0 &> "./logs/batch_A_to_J_plus_0.txt" &
 
 start=1
 end=500
-step=10
+step=2
 
 for ((i=$start; i<=$end; i+=$step)); do
   batch_start=$i
