@@ -3,7 +3,7 @@
 instance="${1:-A}" 
 run="${2:-1}"
 
-echo "Executing BRKGA with: Instance=$instance, Run=$run"
+echo "Executing BRKGA-MOEA/D with: Instance=$instance, Run=$run"
 
 log_dir="../dataset/brkga/$instance/$run"
 log_file="$log_dir/log.txt"
@@ -20,7 +20,7 @@ mkdir -p "$log_dir"
     echo "============================== LOG =============================="
     echo "Instance: $instance"
     echo "Run: $run"
-    echo "Metaheuristic: BRKGA"
+    echo "Metaheuristic: BRKGA-MOEA/D"
     echo "Execution started at: $(date)"
 
     { time ./exe/brkga "$instance" "$path" "$angle" "$wind"; } 2>&1
