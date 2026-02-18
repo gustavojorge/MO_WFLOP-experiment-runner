@@ -48,15 +48,6 @@ vector<Solution*> nsga2(vector<Solution>& pop){
   double mutation_prob = 0.5;
   int stop_criteria = 1000000;
 
-  // cout << endl;
-  // cout << "------------INITIAL POPULATION ------------ " << endl;
-  // for(auto& i : population){
-    // cout << "<" << i.fitness.first << ", " << i.fitness.second << ">" << endl;
-  // }
-  // cout << "------------------------------------------- " << endl << endl;
-
-  // cout << "SIZE OF INITIAL POPULATION: " << population.size() << endl << endl;
-
   ofstream infoRunNSGA2(root_folder + "infoRun.txt");
 
   int generation = 0;
@@ -121,8 +112,6 @@ vector<Solution*> nsga2(vector<Solution>& pop){
 
     delete offspring_population;
 
-    // cout << "SIZE OF TOTAL POPULATION: " << total_population->size() << endl << endl;
-
     //Non dominating sorting
     // vector<vector<Solution*> *> * fronts_fast = new vector<vector<Solution*>*>();
     // *fronts_fast = non_dominated_sorting(*total_population);
@@ -135,49 +124,6 @@ vector<Solution*> nsga2(vector<Solution>& pop){
     }
 
     delete total_population;
-
-    // int qtd = 0;
-    // for (int i = 0; i < fronts->size(); i++) {
-    //   for (int j = 0; j < (*(*fronts)[i]).size(); j++) {
-    //     qtd++;
-    //   }
-    // }
-
-    // cout << "POPULACAO ARENA -> " << qtd << endl;
-
-    // if(qtd < SIZE_OF_POPULATION){
-    //   cerr << "ERROR - MENOR QUE 100" << endl;
-    //   break;
-    // }
-
-    // qtd = 0;
-    // for (int i = 0; i < fronts_fast->size(); i++) {
-    //   for (int j = 0; j < (*(*fronts_fast)[i]).size(); j++) {
-    //     qtd++;
-    //   }
-    // }
-
-    // cout << "POPULACAO FAST -> " << qtd << endl;
-
-    // cout << "========================== FRONTS - ARENA ==========================" << endl << endl;
-    // for (int i = 0; i < fronts->size(); i++) {
-    //   cout << "----------------------- FRONT: " << i << " -----------------------" << endl;
-    //   for (int j = 0; j < (*(*fronts)[i]).size(); j++) {
-    //     cout << "FRONT SIZE: " << (*(*fronts)[i]).size() << endl;
-    //     cout << "<" << (*(*(*fronts)[i])[j]).fitness.first << ", " << (*(*(*fronts)[i])[j]).fitness.second << ">" << endl;
-    //   }
-    // }
-
-    // cout << "========================== FRONTS - FAST ==========================" << endl << endl;
-    // for (int i = 0; i < fronts_fast->size(); i++) {
-    //   cout << "----------------------- FRONT: " << i << " -----------------------" << endl;
-    //   for (int j = 0; j < (*(*fronts_fast)[i]).size(); j++) {
-    //     cout << "FRONT SIZE: " << (*(*fronts_fast)[i]).size() << endl;
-    //     cout << "<" << (*(*(*fronts_fast)[i])[j]).fitness.first << ", " << (*(*(*fronts_fast)[i])[j]).fitness.second << ">" << endl;
-    //   }
-    // }
-
-    // break;    
 
     for(auto i : *population){
       delete i;
@@ -232,15 +178,6 @@ vector<Solution*> nsga2(vector<Solution>& pop){
   }
   
   infoRunNSGA2.close();
-  
-  // cout << endl;
-  // cout << "------------FINAL POPULATION ------------ " << endl;
-  // for(auto& i : population){
-    // cout << "<" << i.fitness.first << ", " << i.fitness.second << ">" << endl;
-  // }
-  // cout << "------------------------------------------- " << endl << endl;
-
-  // cout << "SIZE OF FINAL POPULATION: " << population.size() << endl << endl;
   
   return *population;
 }
