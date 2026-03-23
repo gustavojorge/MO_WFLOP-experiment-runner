@@ -13,16 +13,9 @@
 #include "param.h"
 #include "Grid.h"
 #include "../global_modules/generate_initial_population/generate_rSolution.h"
+#include "./ParetoSet.h"
 
-typedef struct {
-    double min, max;
-} range;
-
-double getObj(Solution *s, int obj);
-bool dominatesP(Solution &s1, Solution &s2);
-bool equals(Solution &s1, Solution &s2);
-
-class ParetoSet {
+class ParetoSetLS {
     protected:
         std::list<pair<Solution *, bool>> sol;
         range rangeNovo[2], rangeAtual[2];
@@ -34,12 +27,15 @@ class ParetoSet {
         void reiniciarRanges();
 
     public:
-        ParetoSet();
-        virtual ~ParetoSet();
+        ParetoSetLS();
+        virtual ~ParetoSetLS();
 
         int getPositionCount(Solution &s);
         int getPositionCount(int p);
+        bool allExplored();
         std::list<pair<Solution *, bool>> getElementos();
+        std::list<pair<Solution *, bool>>::iterator getBegin();
+        std::list<pair<Solution *, bool>>::iterator getEnd();
         
         virtual bool adicionarSol(Solution *s);
         int getSize();

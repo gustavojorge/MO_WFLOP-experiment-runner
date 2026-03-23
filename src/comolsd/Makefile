@@ -10,6 +10,7 @@ CXXFLAGS = -std=c++17 -Werror -O2 \
     -I./headers/metaheuristics/comolsd \
     -I./headers/metaheuristics/comolsd/modules \
     -I./headers/global_modules \
+    -I./headers/global_modules/local_search \
     -I./headers/global_modules/genetic_operators \
     -I./headers/global_modules/generate_initial_population \
     -I./headers/adaptative_grid \

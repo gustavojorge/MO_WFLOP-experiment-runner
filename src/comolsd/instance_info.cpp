@@ -64,7 +64,7 @@ void get_instance_info(int argc, char* argv[]){
     string strPow, strTC;
 
 
-    cout << argc << endl;
+    // cout << argc << endl;
     if(argc > 1 && argc < 5){
         instance = (string) argv[1];
     } else if(argc >= 5){

@@ -16,24 +16,12 @@
 
 using namespace std;
 
-double getObj(Solution *s, int obj){
-    if(obj == 0){
-        return s->fitness.first;
-    }
+struct P {
+    Solution solution;
+    bool checked;
+};
 
-    return s->fitness.second;
-}
-
-bool dominatesP(Solution &s1, Solution &s2){
-    return (s1.fitness.first >= s2.fitness.first && s1.fitness.second >= s2.fitness.second) &&
-           (s1.fitness.first >  s2.fitness.first || s2.fitness.second >  s2.fitness.second);
-}
-
-bool equals(Solution &s1, Solution &s2){
-    return s1.fitness.first == s2.fitness.first && s1.fitness.second == s2.fitness.second;
-}
-
-int ParetoSet::calcularGridPos(Solution &s) {
+int ParetoSetLS::calcularGridPos(Solution &s) {
     int bit = 0;
     int gridPos = 0;
     for (int obj = 0; obj < NUMOBJETIVOS; obj++) {
@@ -52,7 +40,7 @@ int ParetoSet::calcularGridPos(Solution &s) {
     return gridPos;
 }
 
-void ParetoSet::updateGrid() {
+void ParetoSetLS::updateGrid() {
     g.clearGrid();
 
     list<pair<Solution *, bool>>::iterator it = sol.begin();
@@ -72,7 +60,7 @@ void ParetoSet::updateGrid() {
     }
 }
 
-void ParetoSet::reiniciarRanges() {
+void ParetoSetLS::reiniciarRanges() {
     #define INF 1e9
     for (int k = 0; k < NUMOBJETIVOS; k++) {
         rangeAtual[k].min = rangeNovo[k].min = INF;
@@ -81,28 +69,46 @@ void ParetoSet::reiniciarRanges() {
     #undef INF
 }
 
-ParetoSet::ParetoSet() {
+ParetoSetLS::ParetoSetLS() {
     reiniciarRanges();
     memset(frequencia, 0, sizeof(frequencia));
 }
 
-ParetoSet::~ParetoSet() {
+ParetoSetLS::~ParetoSetLS() {
     clear();
 }
 
-int ParetoSet::getPositionCount(Solution &s) {
+int ParetoSetLS::getPositionCount(Solution &s) {
     return g.getPositionCount(calcularGridPos(s));
 }
 
-int ParetoSet::getPositionCount(int p) {
+bool ParetoSetLS::allExplored(){
+    list<pair<Solution *, bool>>::iterator it;
+    for (it = sol.begin(); it != sol.end(); it++){
+        if(!(*it).second){
+            return false;
+        }
+    }
+    return true;
+}
+
+int ParetoSetLS::getPositionCount(int p) {
     return g.getPositionCount(p);
 }
 
-list<pair<Solution *, bool>> ParetoSet::getElementos() {
+list<pair<Solution *, bool>> ParetoSetLS::getElementos() {
     return sol;
 }
 
-bool ParetoSet::adicionarSol(Solution *s) {
+list<pair<Solution *, bool>>::iterator ParetoSetLS::getBegin(){
+    return sol.begin();
+}
+
+list<pair<Solution *, bool>>::iterator ParetoSetLS::getEnd(){
+    return sol.end();
+}
+
+bool ParetoSetLS::adicionarSol(Solution *s) {
     ASS ( assert( confereGrid() ); )
     /* nem testa as solucoes piores */
 	//if (s->getObj(0) >= ranges[0].max && s->getObj(1) >= ranges[1].max) {
@@ -128,8 +134,8 @@ bool ParetoSet::adicionarSol(Solution *s) {
     while (j != remover.end()) {
         // remove do grid
         g.removeGrid(calcularGridPos(*(*j)->first));
-
         // remove do conjunto pareto
+        delete((*j)->first);
         sol.erase(*j);
         j++;
     }
@@ -160,11 +166,11 @@ bool ParetoSet::adicionarSol(Solution *s) {
     return true;
 }
 
-int ParetoSet::getSize() {
+int ParetoSetLS::getSize() {
     return sol.size();
 }
 
-pair<Solution *, bool>ParetoSet::getSolucao(int p) {
+pair<Solution *, bool>ParetoSetLS::getSolucao(int p) {
     int c = 0;
     list<pair<Solution *, bool>>::iterator i = sol.begin();
     while (i != sol.end()) {
@@ -175,7 +181,7 @@ pair<Solution *, bool>ParetoSet::getSolucao(int p) {
     return *i;
 }
 
-void ParetoSet::clear() {
+void ParetoSetLS::clear() {
     list<pair<Solution *, bool>>::iterator i = sol.begin(), j;
     while (i != sol.end()) {
         j = i;
@@ -185,7 +191,7 @@ void ParetoSet::clear() {
     g.clearGrid();
 }
 
-bool ParetoSet::confereGrid() {
+bool ParetoSetLS::confereGrid() {
     unsigned s = 0;
     for (int i = 0; i < g.getSize(); i++) s += g.getPositionCount(i);
     return s == sol.size();
