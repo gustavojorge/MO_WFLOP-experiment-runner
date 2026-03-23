@@ -23,7 +23,7 @@ vector<Solution*> getNeighborhood(Solution *s, int num_neighbors){
         neighbors.push_back(new Solution(sol));
     }
 
-    // delete *neighbors.begin();
+    delete neighbors[0];
     neighbors.erase(neighbors.begin());
 
     return neighbors;

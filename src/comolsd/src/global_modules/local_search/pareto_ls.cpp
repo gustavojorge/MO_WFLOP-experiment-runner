@@ -13,18 +13,16 @@ Solution * pareto_ls(Solution* s){
             // cout << &it << " " << p->getSize() << endl;
 
             if(!(it->second)){
-                vector<Solution *> neighborhood = getNeighborhood(it->first, 10);
+                vector<Solution *> neighborhood = getNeighborhood(it->first, 200);
                 for(int i = 0; i < neighborhood.size(); i++){
                     p->adicionarSol(neighborhood[i]);
                 }
                 it->second = true; //It is possible that *it is not the same at the end of neighborhood insertion
 
-                vector<Solution *>().swap(neighborhood);
-
-                // for(auto p: neighborhood){
-                //     delete p;
-                // }
-                // neighborhood.clear();
+                for(auto p: neighborhood){
+                    delete p;
+                }
+                neighborhood.clear();
                 break;
             }
         }
