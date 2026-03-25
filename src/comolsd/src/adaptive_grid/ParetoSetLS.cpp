@@ -197,7 +197,7 @@ bool ParetoSetLS::confereGrid() {
     return s == sol.size();
 }
 
-list<pair<Solution *, bool>>::iterator ParetoSetLS::getRandomUnex(){
+pair<Solution *, bool> * ParetoSetLS::getRandomUnex(){
     int size = sol.size();
 
     int r = rand() % size;
@@ -214,9 +214,9 @@ list<pair<Solution *, bool>>::iterator ParetoSetLS::getRandomUnex(){
         }else{
             it++;
         }
-    } while(!(it)->second);
+    } while((it)->second);
 
-    return it;
+    return &(*it);
 }
 
 

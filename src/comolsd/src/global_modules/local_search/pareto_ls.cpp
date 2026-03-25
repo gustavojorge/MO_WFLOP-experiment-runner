@@ -8,11 +8,17 @@ vector<Solution *> pareto_ls(vector<Solution*> population){
         p->adicionarSol(population[i]);
     }
 
-    list<pair<Solution *, bool>>::iterator it = p->getBegin();
-    while(!p->allExplored()){
+    cout << "=========================ARCHIVE=========================" << endl;
+    for(auto a = p->getBegin(); a != p->getEnd(); a++){
+        cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
+    }
+
+    pair<Solution *, bool> * it;
+
+    while(!(p->allExplored())){
         it = p->getRandomUnex();
 
-        vector<Solution *> neighborhood = getNeighborhood(it->first, 10);
+        vector<Solution *> neighborhood = getNeighborhood(it->first, 100);
 
         for(int i = 0; i < neighborhood.size(); i++){
             p->adicionarSol(neighborhood[i]);
@@ -23,14 +29,12 @@ vector<Solution *> pareto_ls(vector<Solution*> population){
             delete p;
         }
         neighborhood.clear();
-        break;
-    
     }
 
     vector<Solution *> result;
 
-    for(it = p->getBegin(); it != p->getEnd(); it++){
-        result.push_back((it)->first);
+    for(auto i = p->getBegin(); i != p->getEnd(); i++){
+        result.push_back((i)->first);
     }
 
     return result;
@@ -44,13 +48,11 @@ int main(int argc, char* argv[]){
     vector<Solution*> pop;
 
     for(int i = 0; i < initpop.size(); i++){
-        pop.push_back(new Solution(initpop[i]));
+        Solution * s = new Solution;
+        *s = initpop[i];
+        pop.push_back(s);
     }
 
     pop = pareto_ls(pop);
     
-    cout << "=========================ARCHIVE=========================";
-    for(int i = 0; i < pop.size(); i++){
-        cout << pop[i]->fitness.first << " " << pop[i]->fitness.second << endl;
-    }
 }

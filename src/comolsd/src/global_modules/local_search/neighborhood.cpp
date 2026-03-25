@@ -12,7 +12,7 @@ bool inNeighborhood(Solution * s, vector<Solution*> & neighborhood){
 
 vector<Solution*> getNeighborhood(Solution *s, int num_neighbors){
     vector<Solution *> neighbors;
-
+    
     Solution sol;
 
     for(int i = 0; i < num_neighbors + 1; i++){
