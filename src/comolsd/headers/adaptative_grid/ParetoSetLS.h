@@ -12,7 +12,7 @@
 #include <iostream>
 #include "param.h"
 #include "Grid.h"
-#include "../global_modules/generate_initial_population/generate_rSolution.h"
+#include "../global_modules/generate_initial_population/population.h"
 #include "./ParetoSet.h"
 
 class ParetoSetLS {
@@ -36,6 +36,7 @@ class ParetoSetLS {
         std::list<pair<Solution *, bool>> getElementos();
         std::list<pair<Solution *, bool>>::iterator getBegin();
         std::list<pair<Solution *, bool>>::iterator getEnd();
+        std::list<pair<Solution *, bool>>::iterator getRandomUnex();
         
         virtual bool adicionarSol(Solution *s);
         int getSize();

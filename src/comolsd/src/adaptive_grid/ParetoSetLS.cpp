@@ -197,5 +197,28 @@ bool ParetoSetLS::confereGrid() {
     return s == sol.size();
 }
 
+list<pair<Solution *, bool>>::iterator ParetoSetLS::getRandomUnex(){
+    int size = sol.size();
+
+    int r = rand() % size;
+
+    auto it = sol.begin();
+
+    for(int i = 0; i < r; i++){
+        it++;
+    }
+
+    do{
+        if(it == sol.end()){
+            it = sol.begin();
+        }else{
+            it++;
+        }
+    } while(!(it)->second);
+
+    return it;
+}
+
+
 
 #endif
