@@ -18,6 +18,7 @@ CXXFLAGS = -std=c++17 -Werror -O2 \
 
 SRC_DIR = src
 HEADER_DIR = headers
+LS_DIR = $(SRC_DIR)/global_modules/local_search
 META_DIR = $(SRC_DIR)/global_modules/genetic_operators/mutation
 CROSS_DIR = $(SRC_DIR)/global_modules/genetic_operators/crossover
 RSOLUTION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_random_solution
@@ -26,6 +27,7 @@ POPULATION_DIR = $(SRC_DIR)/global_modules/generate_initial_population/generate_
 SRC_FILES = \
     $(SRC_DIR)/adaptive_grid/ParetoSet.cpp \
     $(SRC_DIR)/adaptive_grid/BoundedParetoSet.cpp \
+    $(SRC_DIR)/adaptive_grid/ParetoSetLS.cpp \
     $(SRC_DIR)/adaptive_grid/Grid.cpp \
     $(SRC_DIR)/global_modules/dominates.cpp \
     $(SRC_DIR)/global_modules/isEqual.cpp \
@@ -44,6 +46,7 @@ SRC_FILES = \
     $(SRC_DIR)/metaheuristics/nsga2/modules/arena_non_dominated_sorting.cpp \
     ${SRC_DIR}/metaheuristics/nsga2/modules/crowding_distance.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/nsga2.cpp \
+    $(SRC_DIR)/metaheuristics/nsga2/nsga2_pls.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/aggregation_wrapper.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/calculate_ipbi.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/calculate_ws.cpp \
@@ -58,6 +61,8 @@ SRC_FILES = \
     ${SRC_DIR}/metaheuristics/comolsd/modules/min_max_cost.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/normalize_objectives.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/comolsd.cpp \
+    ${LS_DIR}/neighborhood.cpp \
+    ${LS_DIR}/pareto_ls.cpp \
     instance_info.cpp
 
 MAIN_FILE = main.cpp

@@ -1,17 +1,17 @@
 #include "../../headers/global_modules/local_search/pareto_ls.h"
 #include "../../headers/instance_info.h"
 
-vector<Solution *> pareto_ls(vector<Solution*> population){
+vector<Solution *> * pareto_ls(vector<Solution*> population){
     ParetoSetLS* p = new ParetoSetLS();
 
     for(int i = 0; i < population.size(); i++){
         p->adicionarSol(population[i]);
     }
 
-    cout << "=========================ARCHIVE=========================" << endl;
-    for(auto a = p->getBegin(); a != p->getEnd(); a++){
-        cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
-    }
+    // cout << "=========================ARCHIVE=========================" << endl;
+    // for(auto a = p->getBegin(); a != p->getEnd(); a++){
+    //     cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
+    // }
 
     pair<Solution *, bool> * it;
 
@@ -31,28 +31,28 @@ vector<Solution *> pareto_ls(vector<Solution*> population){
         neighborhood.clear();
     }
 
-    vector<Solution *> result;
+    vector<Solution *> * result;
 
     for(auto i = p->getBegin(); i != p->getEnd(); i++){
-        result.push_back((i)->first);
+        result->push_back((i)->first);
     }
 
     return result;
 }
 
-int main(int argc, char* argv[]){
-    get_instance_info(argc, argv);
+// int main(int argc, char* argv[]){
+//     get_instance_info(argc, argv);
 
-    auto initpop = create_initial_population(100);
+//     auto initpop = create_initial_population(100);
 
-    vector<Solution*> pop;
+//     vector<Solution*> pop;
 
-    for(int i = 0; i < initpop.size(); i++){
-        Solution * s = new Solution;
-        *s = initpop[i];
-        pop.push_back(s);
-    }
+//     for(int i = 0; i < initpop.size(); i++){
+//         Solution * s = new Solution;
+//         *s = initpop[i];
+//         pop.push_back(s);
+//     }
 
-    pop = pareto_ls(pop);
+//     pop = pareto_ls(pop);
     
-}
+// }

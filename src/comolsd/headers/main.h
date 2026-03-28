@@ -17,11 +17,12 @@
 #include "../headers/metaheuristics/moead/modules/get_best_z_point.h"
 #include "../headers/metaheuristics/moead/modules/tchebycheff.h"
 
-#include "./metaheuristics/nsga2/nsga2.h"
-#include "./metaheuristics/nsga2/modules/binary_tournament.h"
-#include "./metaheuristics/nsga2/modules/crowding_distance.h"
-#include "./metaheuristics/nsga2/modules/non_dominated_sorting.h"
-#include "./metaheuristics/nsga2/modules/arena_non_dominated_sorting.h"
+#include "../headers/metaheuristics/nsga2/nsga2.h"
+#include "../headers/metaheuristics/nsga2/nsga2_pls.h"
+#include "../headers/metaheuristics/nsga2/modules/binary_tournament.h"
+#include "../headers/metaheuristics/nsga2/modules/crowding_distance.h"
+#include "../headers/metaheuristics/nsga2/modules/non_dominated_sorting.h"
+#include "../headers/metaheuristics/nsga2/modules/arena_non_dominated_sorting.h"
 
 #include "../headers/metaheuristics/comolsd/comolsd.h"
 #include "../headers/metaheuristics/comolsd/modules/aggregation_wrapper.h"

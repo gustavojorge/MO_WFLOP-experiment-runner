@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-void updatePopulation(vector<Solution*>& population);
+void add(vector<Solution*>& population, Solution* solution);
 
 vector<Solution*> nsga2(vector<Solution>& pop);
 
