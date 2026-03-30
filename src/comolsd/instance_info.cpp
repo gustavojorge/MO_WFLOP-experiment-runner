@@ -118,7 +118,7 @@ void get_instance_info(int argc, char* argv[]){
     file.open(pathFolders + "/instances/site/" + instance + "/availablePositions.txt");
 
     if(file.fail()){
-        cout << "ERROR: Invalid instance" << endl;
+        cout << "ERROR: Invalid instance: " << pathFolders + "/instances/site/" + instance + "/availablePositions.txt" << endl;
         throw invalid_argument("Invalid instance");
     }
 

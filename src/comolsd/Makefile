@@ -67,7 +67,7 @@ SRC_FILES = \
 
 MAIN_FILE = main.cpp
 
-OUTPUT = comolsd
+OUTPUT = nsga2_pls
 
 $(OUTPUT): $(SRC_FILES) $(MAIN_FILE)
 	@echo Starting compilation of $(OUTPUT)...

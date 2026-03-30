@@ -1,6 +1,6 @@
 #!/bin/bash
 
-main_dir="../dataset/comolsd"
+main_dir="../dataset/nsga2_pls"
 
 if [[ -d "$main_dir" ]]; then
     echo "The directory structure has already been created."
