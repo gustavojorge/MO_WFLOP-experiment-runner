@@ -12,6 +12,7 @@
 #include "../headers/global_modules/isEqual.h"
 
 #include "../headers/metaheuristics/moead/moead.h"
+#include "../headers/metaheuristics/moead/moead_pls.h"
 #include "../headers/metaheuristics/moead/modules/generate_neighborhood.h"
 #include "../headers/metaheuristics/moead/modules/generate_weight_vectors.h"
 #include "../headers/metaheuristics/moead/modules/get_best_z_point.h"
