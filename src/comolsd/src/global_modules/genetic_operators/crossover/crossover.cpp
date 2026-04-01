@@ -104,10 +104,6 @@ Solution crossover(Solution &parent_solutionA, Solution &parent_solutionB){
   if(countRevalue % 100000 == 0){
     string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
     pareto->printAllSolutions(root_folder + path);
-
-    if(countRevalue >= stop_criteria){
-      pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
-    }
   }
 
   return offspring_solution;

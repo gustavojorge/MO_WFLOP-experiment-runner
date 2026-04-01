@@ -94,10 +94,6 @@ void mutation(Solution &solution){
     string path = instance + "_" + algorithm + "_" + to_string(countRevalue) + ".txt";
 
     pareto->printAllSolutions(root_folder + path);
-
-    if(countRevalue >= stop_criteria){
-      pareto->printAllSolutionsLayout(root_folder + instance + "_" + algorithm + "_layout.txt");
-    }
   }
 
   delete sol;
