@@ -5,7 +5,7 @@ directories=(
 )
 
 output_files=(
-    "comolsd"
+    "nsga2_pls"
 )
 
 destination="./scripts/exe"
@@ -44,7 +44,7 @@ cd .. || { echo "Error returning to './scripts'"; exit 1; }
 scripts_dir="./smaller_scripts"
 scripts=(
     "create_folders.sh"
-    "comolsd.sh"
+    "nsga2_pls.sh"
 )
 
 if [[ ! -d "$scripts_dir" ]]; then
