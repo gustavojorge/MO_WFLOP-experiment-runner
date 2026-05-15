@@ -16,6 +16,48 @@
 
 using namespace std;
 
+double ohvc(Solution* s, Solution* s_){
+    return abs((s->fitness.first - s_->fitness.first) * (s_->fitness.second - s->fitness.second));
+};
+double ParetoSetLS::ohiv(pair<Solution *, bool> a){
+    double s_value = a.first->fitness.second;
+    pair<Solution*, bool> s_inf;
+    pair<Solution*, bool> s_sup;
+    s_inf.first->fitness.second = 0;
+    s_sup.first->fitness.second = 2 * a.first->fitness.second;
+
+    list<pair<Solution *, bool>>::iterator it = sol.begin();
+    while(it != sol.end()){
+        if (it->first->fitness.second > s_value){
+            if(it->first->fitness.second <= s_sup.first->fitness.second){
+                s_sup = *it; 
+            }
+        } else if (it->first->fitness.second < s_value){
+            if(it->first->fitness.second >= s_inf.first->fitness.second){
+                s_inf = *it; 
+            }
+        }
+        it++;
+    }
+
+    if(s_inf.first->fitness.second == 0){
+        return 2 * ohvc(a.first, s_sup.first);
+    }
+
+    if(s_sup.first->fitness.second == 0){
+        return 2 * ohvc(s_inf.first, a.first);
+    }
+
+    return ohvc(a.first, s_sup.first) + ohvc(s_inf.first, a.first);
+};
+
+void ParetoSetLS::sortOHIV(){
+    sol.sort([this](const pair<Solution *, bool>& a, const pair<Solution *, bool>& b){
+        return ohiv(a) > ohiv(b);
+    });
+};
+
+
 struct P {
     Solution solution;
     bool checked;
@@ -218,6 +260,28 @@ pair<Solution *, bool> * ParetoSetLS::getRandomUnex(){
 
     return &(*it);
 }
+
+pair<Solution *, bool> * ParetoSetLS::getNext(){
+    sortOHIV();
+
+    list<pair<Solution *, bool>>::iterator i = sol.begin();
+    while(i != sol.end()){
+        if(!i->second){
+            return &(*i);
+        }
+        i++;
+    }
+};
+
+void ParetoSetLS::unexploreAll(){
+    auto it = sol.begin();
+
+    while(it != sol.end()){
+        it->second = false;
+        it++;
+    }
+};
+
 
 
 

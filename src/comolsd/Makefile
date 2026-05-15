@@ -41,6 +41,7 @@ SRC_FILES = \
     $(SRC_DIR)/metaheuristics/moead/modules/tchebycheff.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/updateEP.cpp \
     $(SRC_DIR)/metaheuristics/moead/moead.cpp \
+    $(SRC_DIR)/metaheuristics/moead/moead_pls.cpp \
     ${SRC_DIR}/metaheuristics/nsga2/modules/binary_tournament.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/non_dominated_sorting.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/arena_non_dominated_sorting.cpp \
@@ -63,11 +64,12 @@ SRC_FILES = \
     ${SRC_DIR}/metaheuristics/comolsd/comolsd.cpp \
     ${LS_DIR}/neighborhood.cpp \
     ${LS_DIR}/pareto_ls.cpp \
+    ${LS_DIR}/anytime_pls.cpp \
     instance_info.cpp
 
 MAIN_FILE = main.cpp
 
-OUTPUT = nsga2_pls
+OUTPUT = moead_apls
 
 $(OUTPUT): $(SRC_FILES) $(MAIN_FILE)
 	@echo Starting compilation of $(OUTPUT)...

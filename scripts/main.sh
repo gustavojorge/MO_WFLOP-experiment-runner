@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script2="./smaller_scripts/nsga2_pls.sh"
+script2="./smaller_scripts/moead_apls.sh"
 
 batch=("$@")
 
