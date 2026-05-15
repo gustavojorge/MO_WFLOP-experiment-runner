@@ -64,6 +64,7 @@ SRC_FILES = \
     ${SRC_DIR}/metaheuristics/comolsd/comolsd.cpp \
     ${LS_DIR}/neighborhood.cpp \
     ${LS_DIR}/pareto_ls.cpp \
+    ${LS_DIR}/anytime_pls.cpp \
     instance_info.cpp
 
 MAIN_FILE = main.cpp

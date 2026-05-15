@@ -13,6 +13,7 @@
 #include "../../../headers/metaheuristics/moead/modules/get_best_z_point.h"
 #include "../../../headers/metaheuristics/moead/modules/tchebycheff.h"
 #include "../../../headers/global_modules/local_search/pareto_ls.h"
+#include "../../../headers/global_modules/local_search/anytime_pls.h"
 
 #include "../../../headers/global_modules/genetic_operators/mutation.h"
 #include "../../../headers/global_modules/genetic_operators/crossover.h"
@@ -140,7 +141,9 @@ void moead_pls(vector<Solution>& population){
         pop->push_back(*it);
       }
 
-      vector<Solution *> * newPopulation = pareto_ls(*pop);      
+      // vector<Solution *> * newPopulation = pareto_ls(*pop);      
+      vector<Solution *> * newPopulation = anytime_pls(*pop);      
+
       pop->clear();
 
       for(auto p: *newPopulation){
