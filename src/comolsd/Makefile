@@ -69,7 +69,7 @@ SRC_FILES = \
 
 MAIN_FILE = main.cpp
 
-OUTPUT = moead_apls
+OUTPUT = nsga2_apls
 
 $(OUTPUT): $(SRC_FILES) $(MAIN_FILE)
 	@echo Starting compilation of $(OUTPUT)...

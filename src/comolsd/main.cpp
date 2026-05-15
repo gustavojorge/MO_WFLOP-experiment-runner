@@ -43,6 +43,6 @@ int main(int argc, char* argv[]){
     cout << "Run time:" << endl;
     
     auto population = create_initial_population(SIZE_OF_POPULATION);
-    // nsga2_pls(population);
-    moead_pls(population);
+    nsga2_pls(population);
+    // moead_pls(population);
 }

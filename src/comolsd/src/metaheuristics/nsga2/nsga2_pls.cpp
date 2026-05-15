@@ -8,6 +8,7 @@
 #include "../../../headers/global_modules/genetic_operators/mutation.h"
 #include "../../../headers/global_modules/genetic_operators/crossover.h"
 #include "../../../headers/global_modules/local_search/pareto_ls.h"
+#include "../../../headers/global_modules/local_search/anytime_pls.h"
 #include "../../../headers/metaheuristics/nsga2/modules/binary_tournament.h"
 #include "../../../headers/metaheuristics/nsga2/modules/crowding_distance.h"
 #include "../../../headers/metaheuristics/nsga2/modules/non_dominated_sorting.h"
@@ -166,7 +167,7 @@ vector<Solution*> nsga2_pls(vector<Solution>& pop){
     delete fronts;
 
     if((static_cast<double>(rand()) / RAND_MAX) < ls_prob){
-      vector<Solution *> * newPopulation = pareto_ls(*population);
+      vector<Solution *> * newPopulation = anytime_pls(*population);
   
       for(auto i : *population){
         delete i;

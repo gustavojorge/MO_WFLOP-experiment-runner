@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script2="./smaller_scripts/moead_apls.sh"
+script2="./smaller_scripts/nsga2_apls.sh"
 
 batch=("$@")
 
@@ -24,7 +24,7 @@ for instance in "${batch[@]}"; do
       echo "Running  with instance $instance, Run: $i"
       bash "$script2" "$instance" "$i"
 
-      echo "NSGA-II_PLS has been executed for instance: $instance, Run: $i."
+      echo "NSGA-II_APLS has been executed for instance: $instance, Run: $i."
       echo "---------------------------------------------"
     } >> "$log_file" 2>&1
 

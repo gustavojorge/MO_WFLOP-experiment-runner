@@ -5,10 +5,10 @@ run="${2:-1}"
 
 echo "Executing MOEA/D_PLS with: Instance=$instance, Run=$run"
 
-log_dir="../dataset/moead_apls/$instance/$run"
+log_dir="../dataset/nsga2_apls/$instance/$run"
 log_file="$log_dir/log.txt"
 
-path="../dataset/moead_apls/$instance/$run/"
+path="../dataset/nsga2_apls/$instance/$run/"
 log_path="../dataset/moead/$instance/$run/log.txt"
 
 angle=$(grep "Angle:" "$log_path" | awk '{print $2}')
@@ -23,7 +23,7 @@ mkdir -p "$log_dir"
     echo "Metaheuristic: MOEA/D Pareto Local Search"
     echo "Execution started at: $(date)"
 
-    { time ./exe/moead_apls "$instance" "$path" "$angle" "$wind"; } 2>&1
+    { time ./exe/nsga2_apls "$instance" "$path" "$angle" "$wind"; } 2>&1
 
     echo "Execution ended at: $(date)"
     echo "================================================================="
