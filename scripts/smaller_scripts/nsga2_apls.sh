@@ -3,7 +3,7 @@
 instance="${1:-A}" 
 run="${2:-1}"
 
-echo "Executing MOEA/D_PLS with: Instance=$instance, Run=$run"
+echo "Executing NSGA-II APLS with: Instance=$instance, Run=$run"
 
 log_dir="../dataset/nsga2_apls/$instance/$run"
 log_file="$log_dir/log.txt"
@@ -20,7 +20,7 @@ mkdir -p "$log_dir"
     echo "============================== LOG =============================="
     echo "Instance: $instance"
     echo "Run: $run"
-    echo "Metaheuristic: MOEA/D Pareto Local Search"
+    echo "Metaheuristic: NSGA-II Anytime Pareto Local Search"
     echo "Execution started at: $(date)"
 
     { time ./exe/nsga2_apls "$instance" "$path" "$angle" "$wind"; } 2>&1

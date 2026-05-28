@@ -271,6 +271,7 @@ pair<Solution *, bool> * ParetoSetLS::getNext(){
         }
         i++;
     }
+    return &(*i);
 };
 
 void ParetoSetLS::unexploreAll(){
