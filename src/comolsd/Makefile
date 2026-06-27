@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Werror -O2 \
+CXXFLAGS = -std=c++17 -Werror -O2 -g\
     -I./headers \
     -I./headers/utils \
     -I./headers/metaheuristics \

@@ -13,17 +13,17 @@ vector<Solution *> * pareto_ls(vector<Solution*> population){
     //     cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
     // }
 
-    pair<Solution *, bool> * it;
+    Solution * selected;
 
-    while(!(p->allExplored())){
-        it = p->getRandomUnex();
+    while(!(p->allExplored()) && countRevalue < stop_criteria){
+        selected = p->getRandomUnex();
 
-        vector<Solution *> neighborhood = getNeighborhood(it->first, 163);
+        vector<Solution *> neighborhood = getNeighborhood(selected, 163);
 
         for(int i = 0; i < neighborhood.size(); i++){
             p->adicionarSol(neighborhood[i]);
         }
-        it->second = true; //It is possible that *it is not the same at the end of neighborhood insertion
+        p->markExplored(selected);
 
         for(auto p: neighborhood){
             delete p;

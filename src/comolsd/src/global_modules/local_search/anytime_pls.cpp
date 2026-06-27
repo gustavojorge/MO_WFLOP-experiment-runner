@@ -12,21 +12,21 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
 
     // cout << "=========================ARCHIVE=========================" << endl;
     // for(auto a = p->getBegin(); a != p->getEnd(); a++){
-    //     cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
-    // }
-
-    pair<Solution *, bool> * it;
+        //     cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
+        // }
+        
+    Solution * selected;
 
     // Stop on first solution "improved"
-    while(!(p->allExplored())){
-        it = p->getNext();
+    while(!(p->allExplored()) && countRevalue < stop_criteria){
+        selected = p->getNext();
 
-        vector<Solution *> neighborhood = getNeighborhood(it->first, neighborhood_size);
+        vector<Solution *> neighborhood = getNeighborhood(selected, neighborhood_size);
 
         bool added = false;
 
         for(int i = 0; i < neighborhood.size(); i++){
-            if(dominatesP(*neighborhood[i], *it->first)){
+            if(dominatesP(*neighborhood[i], *selected)){
                 p->adicionarSol(neighborhood[i]);
                 added = true;
                 break;
@@ -35,12 +35,13 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
         
         if(!added){
             for(int i = 0; i < neighborhood.size(); i++){
-                p->adicionarSol(neighborhood[i]);
-                break;
+                if(p->adicionarSol(neighborhood[i]));{
+                    break;
+                }
             }
         }
 
-        it->second = true; //It is possible that *it is not the same at the end of neighborhood insertion
+        p->markExplored(selected);
 
         for(auto p: neighborhood){
             delete p;
@@ -52,16 +53,17 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
 
     p->unexploreAll();
 
-    // Stop on neighborhood fully explored
-    while(!(p->allExplored())){
-        it = p->getNext();
 
-        vector<Solution *> neighborhood = getNeighborhood(it->first, neighborhood_size);
+    // Stop on neighborhood fully explored
+    while(!(p->allExplored()) && countRevalue < stop_criteria){
+        selected = p->getNext();
+
+        vector<Solution *> neighborhood = getNeighborhood(selected, neighborhood_size);
 
         bool added = false;
 
         for(int i = 0; i < neighborhood.size(); i++){
-            if(dominatesP(*neighborhood[i], *it->first)){
+            if(dominatesP(*neighborhood[i], *selected)){
                 p->adicionarSol(neighborhood[i]);
                 added = true;
             }
@@ -73,7 +75,7 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
             }
         }
 
-        it->second = true;
+        p->markExplored(selected);
 
         for(auto p: neighborhood){
             delete p;
