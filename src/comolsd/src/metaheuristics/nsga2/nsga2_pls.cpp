@@ -46,7 +46,7 @@ vector<Solution*> nsga2_pls(vector<Solution>& pop){
 
   while(countRevalue < stop_criteria){
 
-    infoRunNSGA2 << "Generation " << generation << " | Revalues: " << countRevalue << " | GridSize: " << pareto->getSize() << endl;
+    infoRunNSGA2 << "Generation " << generation << " | Revalues: " << countRevalue << " | GridSize: " << pareto->getSize();
 
     // cout << "======================= GENERATION: " << generation << "=======================" << endl << endl;
 
@@ -167,26 +167,34 @@ vector<Solution*> nsga2_pls(vector<Solution>& pop){
     delete fronts;
 
     if((static_cast<double>(rand()) / RAND_MAX) < ls_prob){
-      vector<Solution *> * newPopulation = anytime_pls(*population);
-  
-      for(auto i : *population){
-        delete i;
+      infoRunNSGA2 << " | LOCAL SEARCH EXECUTED";
+
+      list<Solution *> * elements = new list<Solution *>();
+      *elements = pareto->getElementos();
+      vector<Solution *> * pop = new vector<Solution *>();
+
+      for(auto it = elements->begin(); it != elements->end(); it++){
+        pop->push_back(*it);
       }
-      population->clear();
-  
-      while(newPopulation->size() > size_population){
-        int r = rand() % newPopulation->size();
-        delete (*newPopulation)[r];
-        newPopulation->erase(next(newPopulation->begin(), r));
+
+      // vector<Solution *> * newPopulation = pareto_ls(*pop);      
+      vector<Solution *> * newPopulation = anytime_pls(*pop);      
+
+      pop->clear();
+
+      for(auto p: *newPopulation){
+        delete p;
       }
-  
-      *population = *newPopulation;
-  
+      newPopulation->clear();
+      
+      delete elements;
       delete newPopulation;
+      delete pop;
     }
 
     generation++;
-    ls_prob += countRevalue / stop_criteria;
+    infoRunNSGA2 << endl;
+    ls_prob = ((double) countRevalue) / ((double) stop_criteria);
   }
   
   infoRunNSGA2.close();

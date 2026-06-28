@@ -16,47 +16,47 @@
 
 using namespace std;
 
-double ohvc(Solution* s, Solution* s_){
-    return abs((s->fitness.first - s_->fitness.first) * (s_->fitness.second - s->fitness.second));
+double ohvc(pair<Solution*, bool> const & s, pair<Solution*, bool> const & s_){
+    return abs((s.first->fitness.first - s_.first->fitness.first) * (s_.first->fitness.second - s.first->fitness.second));
 };
 double ParetoSetLS::ohiv(pair<Solution *, bool> a){
     double s_value = a.first->fitness.second;
-    pair<Solution*, bool> s_inf;
-    pair<Solution*, bool> s_sup;
-    s_inf.first->fitness.second = 0;
-    s_sup.first->fitness.second = 2 * a.first->fitness.second;
+    Solution s_inf = *a.first;
+    Solution s_sup = *a.first;
+    s_inf.fitness.second = 0.0;
+    s_sup.fitness.second = 2.0 * s_value;
+
 
     list<pair<Solution *, bool>>::iterator it = sol.begin();
     while(it != sol.end()){
         if (it->first->fitness.second > s_value){
-            if(it->first->fitness.second <= s_sup.first->fitness.second){
-                s_sup = *it; 
+            if(it->first->fitness.second <= s_sup.fitness.second){
+                s_sup = *it->first; 
             }
         } else if (it->first->fitness.second < s_value){
-            if(it->first->fitness.second >= s_inf.first->fitness.second){
-                s_inf = *it; 
+            if(it->first->fitness.second >= s_inf.fitness.second){
+                s_inf = *it->first; 
             }
         }
         it++;
     }
 
-    if(s_inf.first->fitness.second == 0){
-        return 2 * ohvc(a.first, s_sup.first);
+    if(s_inf.fitness.second == 0){
+        const pair<Solution *, bool> S_SUP = make_pair<Solution*, bool>(&(s_sup), false);
+        return 2 * ohvc(a, S_SUP);
     }
 
-    if(s_sup.first->fitness.second == 0){
-        return 2 * ohvc(s_inf.first, a.first);
+    if(s_sup.fitness.second == 2 * s_value){
+        const pair<Solution *, bool> S_INF = make_pair<Solution*, bool>(&(s_inf), false);
+        return 2 * ohvc(S_INF, a);
     }
 
-    return ohvc(a.first, s_sup.first) + ohvc(s_inf.first, a.first);
-};
+    const pair<Solution *, bool> S_SUP = make_pair<Solution*, bool>(&(s_sup), false);
+    const pair<Solution *, bool> S_INF = make_pair<Solution*, bool>(&(s_inf), false);
 
-void ParetoSetLS::sortOHIV(){
-    sol.sort([this](const pair<Solution *, bool>& a, const pair<Solution *, bool>& b){
-        return ohiv(a) > ohiv(b);
-    });
-};
 
+    return ohvc(a, S_SUP) + ohvc(S_INF, a);
+};
 
 struct P {
     Solution solution;

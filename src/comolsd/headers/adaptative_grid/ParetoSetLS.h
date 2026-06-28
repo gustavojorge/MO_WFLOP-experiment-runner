@@ -22,7 +22,6 @@ class ParetoSetLS {
         int frequencia[NUMEROVERTICES][NUMEROVERTICES];
         Grid g;
         double ohiv(pair<Solution *, bool> a);
-        void sortOHIV();
 
         int calcularGridPos(Solution &s);
         void updateGrid();
