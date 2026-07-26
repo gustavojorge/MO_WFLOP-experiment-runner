@@ -17,7 +17,11 @@ vector<Solution *> * pareto_ls(vector<Solution*> population){
 
     while(!(p->allExplored()) && countRevalue < stop_criteria){
         selected = p->getRandomUnex();
-
+        if (selected == nullptr) {
+            cout << "Null Pointer Found" << endl;
+            break;
+        }
+        
         vector<Solution *> neighborhood = getNeighborhood(selected, 163);
 
         for(int i = 0; i < neighborhood.size(); i++){
@@ -31,11 +35,14 @@ vector<Solution *> * pareto_ls(vector<Solution*> population){
         neighborhood.clear();
     }
 
-    vector<Solution *> * result;
+    vector<Solution *> * result = new vector<Solution*>();
 
     for(auto i = p->getBegin(); i != p->getEnd(); i++){
         result->push_back((i)->first);
     }
+
+    p->clear();
+    delete p;
 
     return result;
 }

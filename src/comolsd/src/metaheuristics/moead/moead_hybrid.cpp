@@ -67,7 +67,7 @@ void moead_hybrid(vector<Solution>& population,
 
   while (countRevalue < stop_criteria) {
 
-    infoRun << "Generation " << generation << " | Revalues: " << countRevalue << " | GridSize: " << pareto->getSize() << endl;
+    infoRun << "Generation " << generation << " | Revalues: " << countRevalue << " | GridSize: " << pareto->getSize();
 
     for (int i = 0; i < size_population; i++) {
 
@@ -133,6 +133,7 @@ void moead_hybrid(vector<Solution>& population,
     }
 
     if((static_cast<double>(rand()) / RAND_MAX) < ls_prob){
+      infoRun << " | LOCAL SEARCH EXECUTED";
 
       list<Solution *> * elements = new list<Solution *>();
       *elements = pareto->getElementos();
@@ -142,9 +143,7 @@ void moead_hybrid(vector<Solution>& population,
         pop->push_back(*it);
       }
 
-      // vector<Solution *> * newPopulation = pareto_ls(*pop);      
       vector<Solution *> * newPopulation = local_search(*pop);      
-
       pop->clear();
 
       for(auto p: *newPopulation){
@@ -157,7 +156,8 @@ void moead_hybrid(vector<Solution>& population,
       delete pop;
     }
 
-    ls_prob += countRevalue / stop_criteria;
+    infoRun << endl;
+    ls_prob = ((double) countRevalue) / ((double) stop_criteria);
     generation++;
   }
   

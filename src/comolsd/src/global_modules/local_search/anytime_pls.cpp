@@ -9,11 +9,6 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
     for(int i = 0; i < population.size(); i++){
         p->adicionarSol(population[i]);
     }
-
-    // cout << "=========================ARCHIVE=========================" << endl;
-    // for(auto a = p->getBegin(); a != p->getEnd(); a++){
-        //     cout << a->first->fitness.first << " " << a->first->fitness.second << endl;
-        // }
         
     Solution * selected;
 
@@ -88,6 +83,9 @@ vector<Solution *> * anytime_pls(vector<Solution*> population){
     for(auto i = p->getBegin(); i != p->getEnd(); i++){
         result->push_back((i)->first);
     }
+
+    p->clear();
+    delete p;
 
     return result;
 }

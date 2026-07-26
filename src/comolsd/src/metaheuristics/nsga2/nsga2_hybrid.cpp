@@ -169,28 +169,22 @@ vector<Solution*> nsga2_hybrid(vector<Solution>& pop,
 
     if((static_cast<double>(rand()) / RAND_MAX) < ls_prob){
       infoRunNSGA2 << " | LOCAL SEARCH EXECUTED";
+      vector<Solution *> * newPopulation = local_search(*population);      
 
-      list<Solution *> * elements = new list<Solution *>();
-      *elements = pareto->getElementos();
-      vector<Solution *> * pop = new vector<Solution *>();
+      for(auto i : *population){
+        delete i;
+      }
+      population->clear();
 
-      for(auto it = elements->begin(); it != elements->end(); it++){
-        pop->push_back(*it);
+      while(newPopulation->size() > size_population){
+        int r = rand() % newPopulation->size();
+        delete (*newPopulation)[r];
+        newPopulation->erase(next(newPopulation->begin(), r));
       }
 
-      // vector<Solution *> * newPopulation = pareto_ls(*pop);      
-      vector<Solution *> * newPopulation = local_search(*pop);      
-
-      pop->clear();
-
-      for(auto p: *newPopulation){
-        delete p;
-      }
-      newPopulation->clear();
+      *population = *newPopulation;
       
-      delete elements;
       delete newPopulation;
-      delete pop;
     }
 
     generation++;
