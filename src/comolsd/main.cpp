@@ -11,7 +11,7 @@ int countRevalue = 0;
 BoundedParetoSet * pareto = new BoundedParetoSet();
 int stop_criteria = 1000000;
 string algorithm = "nsga2_hybrid";
-string local_search_type = "anytime_pls";
+string local_search_type = "apls";
 string instance = "A";
 string root_folder = "./";
 
