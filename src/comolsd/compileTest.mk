@@ -54,6 +54,9 @@ SRC_FILES = \
     ${SRC_DIR}/metaheuristics/comolsd/modules/min_max_cost.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/normalize_objectives.cpp \
     $(SRC_DIR)/global_modules/local_search/neighborhood.cpp \
+    $(SRC_DIR)/global_modules/local_search/pareto_ls.cpp \
+    $(SRC_DIR)/global_modules/local_search/anytime_pls.cpp \
+    $(SRC_DIR)/global_modules/local_search/local_search_factory.cpp \
     $(META_DIR)/mutation.cpp \
     instance_info.cpp \
     $(POPULATION_DIR)/population.cpp \

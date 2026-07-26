@@ -5,7 +5,7 @@ directories=(
 )
 
 output_files=(
-    "nsga2_apls"
+    "main"
 )
 
 destination="./scripts/exe"
@@ -44,7 +44,7 @@ cd .. || { echo "Error returning to './scripts'"; exit 1; }
 scripts_dir="./smaller_scripts"
 scripts=(
     "create_folders.sh"
-    "nsga2_apls.sh"
+    "run.sh"
 )
 
 if [[ ! -d "$scripts_dir" ]]; then

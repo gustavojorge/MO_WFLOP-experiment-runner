@@ -41,13 +41,13 @@ SRC_FILES = \
     $(SRC_DIR)/metaheuristics/moead/modules/tchebycheff.cpp \
     $(SRC_DIR)/metaheuristics/moead/modules/updateEP.cpp \
     $(SRC_DIR)/metaheuristics/moead/moead.cpp \
-    $(SRC_DIR)/metaheuristics/moead/moead_pls.cpp \
+    $(SRC_DIR)/metaheuristics/moead/moead_hybrid.cpp \
     ${SRC_DIR}/metaheuristics/nsga2/modules/binary_tournament.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/non_dominated_sorting.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/modules/arena_non_dominated_sorting.cpp \
     ${SRC_DIR}/metaheuristics/nsga2/modules/crowding_distance.cpp \
     $(SRC_DIR)/metaheuristics/nsga2/nsga2.cpp \
-    $(SRC_DIR)/metaheuristics/nsga2/nsga2_pls.cpp \
+    $(SRC_DIR)/metaheuristics/nsga2/nsga2_hybrid.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/aggregation_wrapper.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/calculate_ipbi.cpp \
     ${SRC_DIR}/metaheuristics/comolsd/modules/calculate_ws.cpp \
@@ -65,11 +65,12 @@ SRC_FILES = \
     ${LS_DIR}/neighborhood.cpp \
     ${LS_DIR}/pareto_ls.cpp \
     ${LS_DIR}/anytime_pls.cpp \
+    ${LS_DIR}/local_search_factory.cpp \
     instance_info.cpp
 
 MAIN_FILE = main.cpp
 
-OUTPUT = nsga2_apls
+OUTPUT = main
 
 $(OUTPUT): $(SRC_FILES) $(MAIN_FILE)
 	@echo Starting compilation of $(OUTPUT)...

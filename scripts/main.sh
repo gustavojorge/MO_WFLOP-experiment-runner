@@ -1,6 +1,10 @@
 #!/bin/bash
 
-script2="./smaller_scripts/nsga2_apls.sh"
+ALGO="${ALGO:-nsga2_hybrid}"
+LS="${LS:-apls}"
+export LS
+
+script2="./smaller_scripts/run.sh"
 
 batch=("$@")
 
@@ -14,17 +18,17 @@ echo "Using batch: ${batch[@]}"
 for instance in "${batch[@]}"; do
 
   for i in {1..20}; do
-    log_file="./logs/${instance}.txt"
+    log_file="./logs/${ALGO}_${instance}.txt"
 
     echo "Using instance: $instance, Run: $i"
     echo "Appending to log file: $log_file"
 
     # Appending logs to the file
     {
-      echo "Running  with instance $instance, Run: $i"
+      echo "Running $ALGO with instance $instance, Run: $i"
       bash "$script2" "$instance" "$i"
 
-      echo "NSGA-II_APLS has been executed for instance: $instance, Run: $i."
+      echo "$ALGO has been executed for instance: $instance, Run: $i."
       echo "---------------------------------------------"
     } >> "$log_file" 2>&1
 

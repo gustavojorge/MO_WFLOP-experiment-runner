@@ -17,10 +17,11 @@
 
 #include "../../../headers/global_modules/dominates.h"
 #include "../../../headers/global_modules/isEqual.h"
-#include "../../../headers/metaheuristics/nsga2/nsga2_pls.h"
+#include "../../../headers/metaheuristics/nsga2/nsga2_hybrid.h"
 #include "../../../headers/globals.h"
 
-vector<Solution*> nsga2_pls(vector<Solution>& pop){
+vector<Solution*> nsga2_hybrid(vector<Solution>& pop,
+  function<vector<Solution*>*(vector<Solution*>)> local_search){
 
   vector<Solution*> * population = new vector<Solution*>();
 
@@ -178,7 +179,7 @@ vector<Solution*> nsga2_pls(vector<Solution>& pop){
       }
 
       // vector<Solution *> * newPopulation = pareto_ls(*pop);      
-      vector<Solution *> * newPopulation = anytime_pls(*pop);      
+      vector<Solution *> * newPopulation = local_search(*pop);      
 
       pop->clear();
 

@@ -12,14 +12,14 @@
 #include "../headers/global_modules/isEqual.h"
 
 #include "../headers/metaheuristics/moead/moead.h"
-#include "../headers/metaheuristics/moead/moead_pls.h"
+#include "../headers/metaheuristics/moead/moead_hybrid.h"
 #include "../headers/metaheuristics/moead/modules/generate_neighborhood.h"
 #include "../headers/metaheuristics/moead/modules/generate_weight_vectors.h"
 #include "../headers/metaheuristics/moead/modules/get_best_z_point.h"
 #include "../headers/metaheuristics/moead/modules/tchebycheff.h"
 
 #include "../headers/metaheuristics/nsga2/nsga2.h"
-#include "../headers/metaheuristics/nsga2/nsga2_pls.h"
+#include "../headers/metaheuristics/nsga2/nsga2_hybrid.h"
 #include "../headers/metaheuristics/nsga2/modules/binary_tournament.h"
 #include "../headers/metaheuristics/nsga2/modules/crowding_distance.h"
 #include "../headers/metaheuristics/nsga2/modules/non_dominated_sorting.h"
@@ -39,6 +39,10 @@
 #include "../headers/metaheuristics/comolsd/modules/normalize_objectives.h"
 #include "../headers/metaheuristics/comolsd/modules/unionFind.h"
 #include "../headers/metaheuristics/comolsd/modules/update_population.h"
+
+#include "../headers/global_modules/local_search/pareto_ls.h"
+#include "../headers/global_modules/local_search/anytime_pls.h"
+#include "../headers/global_modules/local_search/local_search_type.h"
 
 
 // #include "../metafeatures/features_extraction.cpp"

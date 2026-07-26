@@ -21,11 +21,12 @@
 #include "../../../headers/global_modules/dominates.h"
 #include "../../../headers/global_modules/isEqual.h"
 
-#include "../../../headers/metaheuristics/moead/moead_pls.h"
+#include "../../../headers/metaheuristics/moead/moead_hybrid.h"
 
 using namespace std;
 
-void moead_pls(vector<Solution>& population){
+void moead_hybrid(vector<Solution>& population, 
+  function<vector<Solution*>*(vector<Solution*>)> local_search){
 
   //Initializing the random number generator 
   random_device rd;
@@ -142,7 +143,7 @@ void moead_pls(vector<Solution>& population){
       }
 
       // vector<Solution *> * newPopulation = pareto_ls(*pop);      
-      vector<Solution *> * newPopulation = anytime_pls(*pop);      
+      vector<Solution *> * newPopulation = local_search(*pop);      
 
       pop->clear();
 
